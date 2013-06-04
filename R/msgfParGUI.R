@@ -1,0 +1,182 @@
+msgfParGUI <- function(){
+  require(gWidgets)
+  
+  msgfParameter <- msgfPar()
+  waiting <- TRUE
+  
+  parameters <- list()
+  window <- gwindow('Specify MSGF+ parameters', visible=FALSE)
+  topGrid <- glayout(cont=window, spacing=5, expand=TRUE)
+  
+  topGrid[1,1, anchor=c(1,0)] <- 'Database:'
+  database <- gfilebrowse(text='Path to database file...', type='open', filter=list("All files" = list(patterns = c("*")), "Database files" =list(patterns = c("*.fa","*.fasta"))), cont=topGrid)
+  topGrid[1,2, anchor=c(-1,0)] <- database
+  parameters$database <- database
+  
+  topGrid[2,1, anchor=c(1,0)] <- 'Tolerance:'
+  tolGroup <- ggroup(horizontal=TRUE, cont=topGrid, spacing=0)
+  tolValue <- gedit('40', cont=tolGroup)
+  size(tolValue)[1] <- 40
+  tolUnit <- gcombobox(c('ppm', 'Da'), cont=tolGroup)
+  topGrid[2,2, anchor=c(-1,0)] <- tolGroup
+  parameters$tolerance <- list(tolValue, tolUnit)
+  
+  topGrid[3,1, anchor=c(1,0)] <- 'Isotope error range:'
+  isoGroup <- ggroup(horizontal=TRUE, cont=topGrid, spacing=0)
+  isoLow <- gspinbutton(from=-5, to=10, by=1, cont=isoGroup)
+  svalue(isoLow) <- 0
+  size(isoLow)[1] <- 40
+  glabel(' - ', cont=isoGroup)
+  isoHigh <- gspinbutton(from=-5, to=10, by=1, cont=isoGroup)
+  svalue(isoHigh) <- 1
+  size(isoHigh)[1] <- 40
+  topGrid[3,2, anchor=c(-1,0)] <- isoGroup
+  parameters$isotopeError <- list(isoLow, isoHigh)
+  
+  topGrid[4,1, anchor=c(1,0)] <- 'Target-Decoy:'
+  tdaCheck <- gcheckbox(checked=TRUE, cont=topGrid)
+  topGrid[4,2, anchor=c(-1,0)] <- tdaCheck
+  parameters$tda <- tdaCheck
+  
+  topGrid[5,1, anchor=c(1,0)] <- 'Fragmentation method:'
+  fragMethod <- gcombobox(c('From spectrum', 'CID', 'ETD', 'HCD', 'Merge'), cont=topGrid)
+  topGrid[5,2, anchor=c(-1,0)] <- fragMethod
+  parameters$fragmentation <- fragMethod
+  
+  topGrid[6,1, anchor=c(1,0)] <- 'Instrument:'
+  instrument <- gcombobox(c('Low-res LCQ/LTQ', 'High-res LTQ', 'TOF', 'Q-Exactive'), cont=topGrid)
+  topGrid[6,2, anchor=c(-1,0)] <- instrument
+  parameters$instrument <- instrument
+  
+  topGrid[7,1, anchor=c(1,0)] <- 'Enzyme:'
+  enzyme <- gcombobox(c('Unspecific', 'Trypsin', 'Chymotrypsin', 'Lys-C', 'Lys-N', 'Glu-C', 'Arg-C', 'Asp-N', 'alphaLP', 'None'), cont=topGrid)
+  svalue(enzyme) <- 'Trypsin'
+  topGrid[7,2, anchor=c(-1,0)] <- enzyme
+  parameters$enzyme <- enzyme
+  
+  topGrid[8,1, anchor=c(1,0)] <- 'Protocol:'
+  protocol <- gcombobox(c('None', 'Phosphorylation', 'iTRAQ', 'iTRAQPhospho'), cont=topGrid)
+  topGrid[8,2, anchor=c(-1,0)] <- protocol
+  parameters$protocol <- protocol
+  
+  topGrid[9,1, anchor=c(1,0)] <- 'Tolerable termini:'
+  tolTerm <- gspinbutton(from=0, to=2, by=1, cont=topGrid)
+  svalue(tolTerm) <- 2
+  size(tolTerm)[1] <- 40
+  topGrid[9,2, anchor=c(-1,0)] <- tolTerm
+  parameters$tolerableTerm <- tolTerm
+  
+  topGrid[10,1, anchor=c(1,0)] <- 'Peptide length:'
+  lengthGroup <- ggroup(horizontal=TRUE, cont=topGrid, spacing=0)
+  lengthLow <- gspinbutton(from=1, to=100, by=1, cont=lengthGroup)
+  svalue(lengthLow) <- 6
+  size(lengthLow)[1] <- 40
+  glabel(' - ', cont=lengthGroup)
+  lengthHigh <- gspinbutton(from=1, to=100, by=1, cont=lengthGroup)
+  svalue(lengthHigh) <- 40
+  size(lengthHigh)[1] <- 40
+  topGrid[10,2, anchor=c(-1,0)] <- lengthGroup
+  parameters$length <- list(lengthLow, lengthHigh)
+  
+  topGrid[11,1, anchor=c(1,0)] <- 'Peptide charge:'
+  chargeGroup <- ggroup(horizontal=TRUE, cont=topGrid, spacing=0)
+  chargeLow <- gspinbutton(from=1, to=10, by=1, cont=chargeGroup)
+  svalue(chargeLow) <- 2
+  size(chargeLow)[1] <- 40
+  glabel(' - ', cont=chargeGroup)
+  chargeHigh <- gspinbutton(from=1, to=10, by=1, cont=chargeGroup)
+  svalue(chargeHigh) <- 3
+  size(chargeHigh)[1] <- 40
+  topGrid[11,2, anchor=c(-1,0)] <- chargeGroup
+  parameters$charge <- list(chargeLow, chargeHigh)
+  
+  topGrid[12,1, anchor=c(1,0)] <- 'Matches per spectrum:'
+  matches <- gspinbutton(from=1, to=100, by=1, cont=topGrid)
+  svalue(matches) <- 1
+  size(matches)[1] <- 40
+  topGrid[12,2, anchor=c(-1,0)] <- matches
+  parameters$matches <- matches
+  
+  topGrid[13,1, anchor=c(1,0)] <- 'Modifications pr peptide:'
+  modNum <- gspinbutton(from=1, to=10, by=1, cont=topGrid)
+  svalue(modNum) <- 2
+  size(modNum)[1] <- 40
+  topGrid[13,2, anchor=c(-1,0)] <- modNum
+  modButtonGroup <- ggroup(horizontal=FALSE, cont=topGrid, spacing=0)
+  addMod <- gbutton('Add', cont=modButtonGroup)
+  addSpace(modButtonGroup, 12, horizontal=FALSE)
+  remMod <- gbutton('Remove', cont=modButtonGroup)
+  topGrid[14, 1, anchor=c(1,-1)] <- modButtonGroup
+  modTable <- gtable(data.frame(name='Carbamidomethyl', composition='C2H3N1O1', mass='', residues='C', type='fixed', position='any', stringsAsFactors=FALSE), cont=topGrid)
+  topGrid[14, 2] <- modTable
+  parameters$modifications <- list(modNum, modTable)
+  
+  okButtonGroup <- ggroup(horizontal=TRUE, cont=topGrid)
+  addSpring(okButtonGroup)
+  okButton <- gbutton('ok', cont=okButtonGroup)
+  topGrid[15, 1:2, expand=TRUE] <- okButtonGroup
+  
+  addHandlerClicked(addMod, handler=function(h, ...){
+    addDialog <- gbasicdialog('Add modification type', handler=function(h, ...){
+      adding <- lapply(addWidgets, svalue)
+      modTable[] <- rbind(modTable[], data.frame(adding, stringsAsFactors=FALSE))
+    })
+    addDialogLayout <- glayout(cont=addDialog, spacing=5)
+    addWidgets <- list()
+    addDialogLayout[1,1, anchor=c(1,0)] <- 'Name:'
+    addDialogLayout[1,2, anchor=c(-1,0)] <- addWidgets[['name']] <- gedit(cont=addDialogLayout)
+    addDialogLayout[2,1, anchor=c(1,0)] <- 'Composition:'
+    addDialogLayout[2,2, anchor=c(-1,0)] <- addWidgets[['composition']] <- gedit(cont=addDialogLayout)
+    addDialogLayout[3,1, anchor=c(1,0)] <- 'Mass:'
+    addDialogLayout[3,2, anchor=c(-1,0)] <- addWidgets[['mass']] <- gedit(cont=addDialogLayout)
+    addDialogLayout[4,1, anchor=c(1,0)] <- 'Residues:'
+    addDialogLayout[4,2, anchor=c(-1,0)] <- addWidgets[['residues']] <- gedit(cont=addDialogLayout)
+    addDialogLayout[5,1, anchor=c(1,0)] <- 'Type:'
+    addDialogLayout[5,2, anchor=c(-1,0)] <- addWidgets[['type']] <- gcombobox(c('fixed', 'optional'), cont=addDialogLayout)
+    addDialogLayout[6,1, anchor=c(1,0)] <- 'Position:'
+    addDialogLayout[6,2, anchor=c(-1,0)] <- addWidgets[['position']] <- gcombobox(c('any', 'n-term', 'c-term', 'prot-n-term', 'prot-c-term'), cont=addDialogLayout)
+    visible(addDialog, set=TRUE)
+  })
+  
+  addHandlerClicked(remMod, handler=function(h, ...){
+    selected <- svalue(modTable, index=TRUE)
+    if(!is.na(selected)){
+      modTable[] <- modTable[-selected, , drop=FALSE]
+    }
+  })
+  
+  addHandlerClicked(okButton, handler=function(h, ...){
+    parameters <- list()
+    parameters$database <- svalue(h$action$database)
+    parameters$tolerance <- msgfParTolerance(value=as.numeric(svalue(h$action$tolerance[[1]])), unit=svalue(h$action$tolerance[[2]]))
+    parameters$isotopeError <- msgfParIsotopeError(svalue(h$action$isotopeError[[1]]):svalue(h$action$isotopeError[[2]]))
+    parameters$tda <- msgfParTda(svalue(h$action$tda))
+    parameters$fragmentation <- msgfParFragmentation(svalue(h$action$fragmentation, index=TRUE)-1)
+    parameters$instrument <- msgfParInstrument(svalue(h$action$instrument, index=TRUE)-1)
+    parameters$enzyme <- msgfParEnzyme(svalue(h$action$enzyme, index=TRUE)-1)
+    parameters$protocol <- msgfParProtocol(svalue(h$action$protocol, index=TRUE)-1)
+    parameters$ntt <- msgfParNtt(svalue(h$action$tolerableTerm))
+    parameters$lengthRange <- msgfParLengthRange(c(svalue(h$action$length[[1]]), svalue(h$action$length[[2]])))
+    parameters$chargeRange <- msgfParChargeRange(c(svalue(h$action$charge[[1]]), svalue(h$action$charge[[2]])))
+    parameters$matches <- msgfParMatches(svalue(h$action$matches))
+    modifications <- h$action$modifications[[2]][,,drop=FALSE]
+    modifications$mass <- as.numeric(modifications$mass)
+    modificationPars <- list()
+    for(i in 1:nrow(modifications)) modificationPars[[i]] <- do.call('msgfParModification', modifications[i,])
+    parameters$modification <- msgfParModificationList(svalue(h$action$modifications[[1]]), modificationPars)
+    msgfParameter <<- do.call('msgfPar', parameters)
+    waiting <<- FALSE
+    dispose(window)
+  }, action=parameters)
+  
+  addHandlerUnrealize(window, handler=function(h, ...){
+    waiting <<- FALSE
+  })
+  visible(window) <- TRUE
+  
+  while(waiting){
+    Sys.sleep(0.05)
+  }
+  
+  return(msgfParameter)
+}

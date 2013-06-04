@@ -1,0 +1,8 @@
+exportClasses(msgfRaw, msgfRes, msgfPar)
+exportMethods(isLoaded, getMSGFpar)
+export(msgfPar)
+export(msgfRes)
+export(msgfRaw)
+export(msgfParFromID)
+export(msgfRawFromID)
+import(XML)

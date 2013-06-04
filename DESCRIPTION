@@ -1,0 +1,13 @@
+Package: MSGFplus
+Type: Package
+Title: A package to run MS GF+ through R
+Version: 0.0-1
+Date: 2012-12-12
+Author: Thomas Dybdal Pedersen
+Maintainer: Thomas Dybdal Pedersen <thomasp85@gmail.com>
+Description: This package contains function to perform peptide identification using MS GF+
+License: GPL (>= 2)
+LazyLoad: yes
+Depends: methods, mzR
+Imports: XML 
+Collate: generics.R msgfParChargeRange.R msgfParEnzyme.R msgfParFragmentation.R msgfParInstrument.R msgfParIsotopeError.R msgfParLengthRange.R msgfParMatches.R msgfParModification.R msgfParModificationList.R msgfParNtt.R msgfParProtocol.R msgfParTda.R msgfParTolerance.R msgfPar.R msgfRes.R msgfRaw.R msgf.R
