@@ -1,6 +1,4 @@
 msgfParGUI <- function(){
-  require(gWidgets)
-  
   msgfParameter <- msgfPar()
   waiting <- TRUE
   
