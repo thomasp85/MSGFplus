@@ -103,6 +103,17 @@ setClass(
 		matches=msgfParMatches()
 	)
 )
+
+#' Show method for msgfPar objects
+#' 
+#' This method report a general summary of the parameters specified in the msgfPar object
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return A description of the content of the msgfPar object
+#' 
+#' @seealso \code{\link{msgfPar-class}}
+#' 
 setMethod(
 	'show', 'msgfPar',
 	function(object){
@@ -126,6 +137,19 @@ setMethod(
 		}
 	}
 )
+
+#' Report the length of an msgfPar object
+#' 
+#' The length of an msgfPar object is defined as 1 if a database is present and 0 otherwise
+#' 
+#' @param x An msgfPar object
+#' 
+#' @return A \code{numeric} giving the lengthof the object
+#' 
+#' @seealso \code{\link{msgfPar-class}}
+#' 
+#' @aliases length,msgfPar-method
+#' 
 setMethod(
 	'length', 'msgfPar',
 	function(x){
@@ -136,6 +160,10 @@ setMethod(
 		}
 	}
 )
+
+#' @rdname getMSGFpar-methods
+#' @aliases getMSGFpar,msgfPar-method
+#' 
 setMethod(
 	'getMSGFpar', 'msgfPar',
 	function(object){
@@ -151,12 +179,20 @@ setMethod(
 		ans
 	}
 )
+
+#' @rdname database-methods
+#' @aliases database,msgfPar-method
+#' 
 setMethod(
 	'database', 'msgfPar',
 	function(object){
 		object@database
 	}
 )
+
+#' @rdname database-methods
+#' @aliases database<-,msgfPar-method
+#' 
 setReplaceMethod(
 	'database', 'msgfPar',
 	function(object, value){
@@ -165,13 +201,23 @@ setReplaceMethod(
 		object
 	}
 )
+
+#' @param rawfiles A character vector holding the filepath to the spectrum files to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2, *.pkl or *_dta.txt)
+#' 
+#' @param savenames An optinal vector of same length as rawfiles. Specifies the name used to save the results. If omitted the results will be saved with the same name as the rawfile, but with an .mzid extension.
+#' 
+#' @param import Logical (default=TRUE). Should the results be imported in to R after the analysis is finished.
+#' 
+#' @param memory An integer (default=10000). How much memory should be allocated to the java virtual machine during execution (in mb)
+#' 
+#' @rdname runMSGF-methods
+#' @aliases runMSGF,msgfPar-method
 setMethod(
   'runMSGF', 'msgfPar',
-  function(object, database, rawfiles, savenames, import=TRUE, memory=10000){
+  function(object, rawfiles, savenames, import=TRUE, memory=10000){
     if(length(rawfiles) != length(savenames) & !missing(savenames)){
       stop('Number of raw files must correspond to number of savenames')
     } else {}
-    database <- rep(database, ceiling(length(rawfiles)/length(database)))[1:length(rawfiles)]
     systemCall <- getMSGFpar(object)
     if(missing(savenames)){
       savenames <- paste(sapply(strsplit(rawfiles,"\\."), function(x) paste(x[1:(length(x)-1)], collapse=".")), '.mzid', sep='')
@@ -193,18 +239,29 @@ setMethod(
     }
   }
 )
-createFileCall <- function(rawfile, savename, database){
+
+#' Create terminal compatible strings of input and output names
+#' 
+#' @param rawfile The location of the spectrum file
+#' 
+#' @param savename The location where the results should be saved
+#' 
+#' @return A character vector that is compatible with the OS that can be concatenated with the MSGF+ call
+#' 
+createFileCall <- function(rawfile, savename){
   if(Sys.info()["sysname"] == 'Windows'){
     rawfile <- paste0('\"', rawfile, '\"')
     savename <- paste0('\"', savename, '\"')
-    database <- paste0('\"', database, '\"')
   } else {
     rawfile <- gsub(' ', '\\ ', rawfile, fixed=T)
     savename <- gsub(' ', '\\ ', savename, fixed=T)
-    database <- gsub(' ', '\\ ', database, fixed=T)
   }
   paste0('-s ', rawfile, ' -o ', savename, ' -d', database)
 }
+
+#' Constructor for the msgfPar class
+#' 
+#' 
 msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instrument, enzyme, protocol, ntt, modification, lengthRange, chargeRange, matches){
 	if(missing(database)) database <- ''
 	call <- list()
