@@ -191,9 +191,6 @@ setMethod(
 		object@database
 	}
 )
-
-#' @rdname database-methods
-#' 
 setReplaceMethod(
 	'database', 'msgfPar',
 	function(object, value){
@@ -433,8 +430,6 @@ msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instr
 #' @return An msgfPar object with parameters matching the input file
 #' 
 #' @seealso \code{\link{msgfPar-class}}
-#' 
-#' @importFrom mzID mzID:::mzIDparameters
 #' 
 #' @export
 #' 
