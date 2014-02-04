@@ -14,13 +14,15 @@
 #' @include msgfParTolerance.R
 NULL
 
-#' A class to contain parameters used in an MSGF+ analysis
+#' A class to contain parameters used in an MS-GF+ analysis
 #' 
-#' This class collects and stores parameters for an MSGF+ analysis and is the starting point for peptide identification
+#' This class collects and stores parameters for an MS-GF+ analysis and is the
+#' starting point for peptide identification
 #' 
-#' This class contains a range of other classes, each handling a different set of parameters. Often these classes are simple containers that
-#' only takes care of errorchecking and generating command line arguments, but in some cases, as with msgfParModificationList, the class is
-#' a bit more complex.
+#' This class contains a range of other classes, each handling a different set
+#' of parameters. Often these classes are simple containers that only takes care
+#' of errorchecking and generating command line arguments, but in some cases, as
+#' with msgfParModificationList, the class is a bit more complex.
 #' 
 #' @name msgfPar-class
 #' 
@@ -47,12 +49,13 @@ NULL
 #' @section Methods:
 #' \describe{
 #'  \item{\code{\link{getMSGFpar}}:}{Get a string representation of the object that can be directly used in a system call.}
-#'  \item{\code{\link{runMSGF}}:}{Start an MSGF+ search based on the msgfPar object.}
+#'  \item{\code{\link{runMSGF}}:}{Start an MS-GF+ search based on the msgfPar object.}
 #'  \item{\code{\link{database}}:}{Retrieves the database location from the msgfPar object.}
 #'  \item{\code{\link{database<-}}:}{Sets the database location for the msgfPar object.}
 #' }
 #' 
-#' @seealso \code{\link{msgfPar}} \code{\link{msgfParGUI}}
+#' @seealso \code{\link{msgfParGUI}}
+#' @family msgfParClasses
 #' 
 #' @references \url{http://proteomics.ucsd.edu/Software/MSGFPlus.html}
 #' 
@@ -107,7 +110,8 @@ setClass(
 
 #' Show method for msgfPar objects
 #' 
-#' This method report a general summary of the parameters specified in the msgfPar object
+#' This method report a general summary of the parameters specified in the
+#' msgfPar object
 #' 
 #' @param object An msgfPar object
 #' 
@@ -141,15 +145,14 @@ setMethod(
 
 #' Report the length of an msgfPar object
 #' 
-#' The length of an msgfPar object is defined as 1 if a database is present and 0 otherwise
+#' The length of an msgfPar object is defined as 1 if a database is present and
+#' 0 otherwise
 #' 
 #' @param x An msgfPar object
 #' 
 #' @return A \code{numeric} giving the lengthof the object
 #' 
 #' @seealso \code{\link{msgfPar-class}}
-#' 
-#' @aliases length,msgfPar-method
 #' 
 setMethod(
 	'length', 'msgfPar',
@@ -163,14 +166,13 @@ setMethod(
 )
 
 #' @rdname getMSGFpar-methods
-#' @aliases getMSGFpar,msgfPar-method
 #' 
 setMethod(
 	'getMSGFpar', 'msgfPar',
 	function(object){
 		par <- list(object@tolerance, object@isotopeError, object@tda, object@fragmentation, object@instrument, object@enzyme, object@protocol, object@ntt, object@modification, object@lengthRange, object@chargeRange, object@matches)
 		par <- sapply(par, getMSGFpar)
-    par <- par[par!='']
+        par <- par[par!='']
 		if(Sys.info()["sysname"] == 'Windows'){
 			db <- paste('\"', object@database, '\"', sep='')
 		} else {
@@ -182,7 +184,6 @@ setMethod(
 )
 
 #' @rdname database-methods
-#' @aliases database,msgfPar-method
 #' 
 setMethod(
 	'database', 'msgfPar',
@@ -192,7 +193,6 @@ setMethod(
 )
 
 #' @rdname database-methods
-#' @aliases database<-,msgfPar-method
 #' 
 setReplaceMethod(
 	'database', 'msgfPar',
@@ -211,8 +211,9 @@ setReplaceMethod(
 #' 
 #' @param memory An integer (default=10000). How much memory should be allocated to the java virtual machine during execution (in mb)
 #' 
+#' @importFrom mzID mzID
 #' @rdname runMSGF-methods
-#' @aliases runMSGF,msgfPar-method
+#' 
 setMethod(
   'runMSGF', 'msgfPar',
   function(object, rawfiles, savenames, import=TRUE, memory=10000){
@@ -243,6 +244,87 @@ setMethod(
 
 #' Constructor for the msgfPar class
 #' 
+#' This function creates an msgfPar object with the specified parameters. If 
+#' some parameters have not been specified they will not be part of the MS-GF+ 
+#' call and MS-GF+'s own defaults kicks in; Consult the MS-GF+ documentation for
+#' these. Note however that at least a database file is required to run an 
+#' analysis.
+#' 
+#' Please consult the MS-GF+ documentation for full description of the parameters
+#' 
+#' @param database The location of the fasta file to use as search database
+#' 
+#' @param tolerance The parent ion tolerance to use. In simple cases a string in the form '20ppm' or '1Da' or an msgfParTolerance object if asymmetric tolerance is desired
+#' 
+#' @param isotopeError The range of isotope errors used to correct for non-monoisotopic peaks. Either a numeric vector of length 2 specifying the lower and upper bounds of the range, or an msgfParIsotopeError object
+#' 
+#' @param tda \code{Logical} Should Target-Decoy approach be used to calculate FDR values.
+#' 
+#' @param fragmentation An integer specifying which fragmentation has been used during data acquisition. See details.
+#' 
+#' @param instrument An integer specifying the type of instrument used during data acquisition. See details.
+#' 
+#' @param enzyme An integer or name specifying the enzyme that has been used for protein digestion. See details.
+#' 
+#' @param protocol An integer or name specifying the type of preparation that has been done for the samples. See details.
+#' 
+#' @param ntt An integer specifying the cleavage specificity (Number of Tolerable Termini). 2 only allows fully tryptic peptide (if trypsin is used), 1 allows semitryptic peptides and 0 allows unspecific peptides
+#' 
+#' @param modification An msgfParModificationList object or a list containing the named elements nmod and modification containg respectively an integer with the number of allowed modifications per petide and the modifications to search for as msgfParModification 
+#' 
+#' @param lengthRange A two element vector containing the lower and upper bounds of the residue length to search for
+#' 
+#' @param chargeRange A two element vector containing the lower and upper bounds of the charge range to search for
+#' 
+#' @param matches The number of matches to report per spectrum
+#' 
+#' 
+#' @details
+#' Fragmentation is usually specified as an integer according to the following lookup
+#' \describe{
+#'   \item{0}{As written in the spectrum or CID if no info}
+#'   \item{1}{CID}
+#'   \item{2}{ETD}
+#'   \item{3}{HCD}
+#'   \item{4}{Merge spectra from the same precursor}
+#' }
+#' It is possible to use the full name of the description for a more litteral function call
+#' 
+#' Instrument can likewise be specified as an integer or as a name according to this list
+#' \describe{
+#'   \item{0}{Low-res LCQ/LTQ}
+#'   \item{1}{High-res LTQ}
+#'   \item{2}{TOF}
+#'   \item{3}{Q-Exactive}
+#' }
+#' 
+#' Enymes are specified in the same manner using the following list
+#' \describe{
+#'   \item{0}{Unspecific cleavage}
+#'   \item{1}{Trypsin}
+#'   \item{2}{Chymotrypsin}
+#'   \item{3}{Lys-C}
+#'   \item{4}{Lys-N}
+#'   \item{5}{glutamyl endopeptidase (Glu-C)}
+#'   \item{6}{Arg-C}
+#'   \item{7}{Asp-N}
+#'   \item{8}{alphaLP}
+#'   \item{9}{No cleavage}
+#' }
+#' 
+#' The protocol informs MS-GF+ whether a special sample treatment has been performed as part of the analysis. The protocol is specified according to the following list
+#' \describe{
+#'   \item{0}{No protocol}
+#'   \item{1}{Phosphorylation}
+#'   \item{2}{iTRAQ}
+#'   \item{3}{iTRAQPhospho}
+#' }
+#' 
+#' @family msgfParClasses
+#' 
+#' @references \href{http://proteomics.ucsd.edu/Software/MSGFPlus.html}{MS-GF+}
+#' 
+#' @export
 #' 
 msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instrument, enzyme, protocol, ntt, modification, lengthRange, chargeRange, matches){
 	if(missing(database)) database <- ''
@@ -335,6 +417,27 @@ msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instr
 	} else {}
 	do.call('new', call)
 }
+
+#' Extract parameters from mzIdentML result file
+#' 
+#' This function analyses an mzIdentML file generated using MS-GF+ and returns 
+#' an msgfPar object with parameters matching the ones used to generate the 
+#' mzIdentML file. If the mzIdentML file does not origin from an MS-GF+ analysis
+#' it throws an error.
+#' 
+#' NOTE: At the moment the number of allowed modifications per peptide is not
+#' written to the result file and can thus not be extracted. It defaults to 2
+#' 
+#' @param file The mzIdentML file to extract the parameters from
+#' 
+#' @return An msgfPar object with parameters matching the input file
+#' 
+#' @seealso \code{\link{msgfPar-class}}
+#' 
+#' @importFrom mzID mzID:::mzIDparameters
+#' 
+#' @export
+#' 
 msgfParFromID <- function(file){
     parameters <- mzID:::mzIDparameters(path=file)
     if (parameters@software$name[parameters@software$id == 'ID_software'] != 'MS-GF+') {
