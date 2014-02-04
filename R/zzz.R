@@ -9,4 +9,5 @@
             warning('Java need to be at least version 1.7 for MS-GF+ to work. Please upgrade.')
         }
     }
+    printMSGFLicense()
 }
