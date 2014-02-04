@@ -16,6 +16,7 @@ Imports:
 Suggests:
     gWidgets
 Collate:
+    'MSGFplus-package.R'
     'aaa.R'
     'generics.R'
     'msgfParTolerance.R'
