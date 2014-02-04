@@ -10,10 +10,10 @@ License: GPL (>= 2)
 SystemRequirements: Java (>= 1.7)
 LazyLoad: yes
 Depends:
-    methods,
-    mzR
+    methods
 Imports:
-    XML,
+    mzID
+Suggests:
     gWidgets
 Collate:
     'aaa.R'
