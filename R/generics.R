@@ -1,6 +1,7 @@
 #' Get a string representation of an msgfPar-related object
 #' 
-#' The string representation is defined as the arguments that should get appended to the call when running MSGF+ in the terminal/command prompt
+#' The string representation is defined as the arguments that should get
+#' appended to the call when running MSGF+ in the terminal/command prompt
 #' 
 #' @param object An msgfPar object or a related object
 #' 
@@ -19,7 +20,8 @@ setGeneric(
 
 #' Get and set the location of the database file as specified in the msgfPar object
 #' 
-#' This function extracts or replaces the string holding the database location in the msgfPar object
+#' This function extracts or replaces the string holding the database location
+#' in the msgfPar object
 #' 
 #' @param object An msgfPar object
 #' 
@@ -48,13 +50,17 @@ setGeneric(
 
 #' Start an MSGF+ analysis based on an msgfPar object
 #' 
-#' This function extracts the parameters defined in an msgfPar object and starts an MSGF+ analysis through a system() call
+#' This function extracts the parameters defined in an msgfPar object and starts
+#' an MSGF+ analysis through a system() call
 #' 
 #' @param object An msgfPar object
 #' 
 #' @return If the result of the analysis is imported, a list of mzID objects
 #' 
-#' @import mzID
+#' @export
+#' 
+#' @docType methods
+#' @rdname runMSGF-methods
 #' @seealso \code{\link[mzID]{mzID}}
 #' 
 setGeneric(
