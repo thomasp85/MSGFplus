@@ -336,87 +336,49 @@ msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instr
 	do.call('new', call)
 }
 msgfParFromID <- function(file){
-	parsedMZID <- xmlTreeParse(file, useInternalNodes=TRUE)
-	rootMZID <- xmlRoot(parsedMZID)
+    parameters <- mzID:::mzIDparameters(path=file)
+    if (parameters@software$name[parameters@software$id == 'ID_software'] != 'MS-GF+') {
+        stop('Parameters can only be imported if result file has been processed with MS-GF+')
+    }
 	ans <- list()
-	ans$database <- xmlAttrs(rootMZID[['DataCollection']][['Inputs']][['SearchDatabase']])['location']
+	ans$database <- parameters@databaseFile$location
 	if(!file.exists(ans$database)){
 		ans$database <- file.path(dirname(file), basename(ans$database))
 		if(!file.exists(ans$database)){
 			ans$database <- ''
 		} else {}
 	} else {}
-	for(i in 1:length(xmlSApply(rootMZID[['AnalysisProtocolCollection']][['SpectrumIdentificationProtocol']][['AdditionalSearchParams']], xmlName))){
-		if(xmlName(rootMZID[['AnalysisProtocolCollection']][['SpectrumIdentificationProtocol']][['AdditionalSearchParams']][[i]]) == 'userParam'){
-			param <- xmlAttrs(rootMZID[['AnalysisProtocolCollection']][['SpectrumIdentificationProtocol']][['AdditionalSearchParams']][[i]])
-			if(param['name'] == 'TargetDecoyApproach'){
-				ans$tda <- as.logical(param['value'])
-			} else if(param['name'] == 'MinIsotopeError'){
-				ans$isotopeError[1] <- as.numeric(param['value'])
-			} else if(param['name'] == 'MaxIsotopeError'){
-				ans$isotopeError[2] <- as.numeric(param['value'])
-			} else if(param['name'] == 'FragmentMethod'){
-				ans$fragmentation <- param['value']
-			} else if(param['name'] == 'Instrument'){
-				ans$instrument <- param['value']
-			} else if(param['name'] == 'NumTolerableTermini'){
-				ans$ntt <- as.numeric(param['value'])
-			} else if(param['name'] == 'NumMatchesPerSpec'){
-				ans$matches <- as.numeric(param['value'])
-			} else if(param['name'] == 'MinPepLength'){
-				ans$lengthRange[1] <- as.numeric(param['value'])
-			} else if(param['name'] == 'MaxPepLength'){
-				ans$lengthRange[2] <- as.numeric(param['value'])
-			} else if(param['name'] == 'MinCharge'){
-				ans$chargeRange[1] <- as.numeric(param['value'])
-			} else if(param['name'] == 'MaxCharge'){
-				ans$chargeRange[2] <- as.numeric(param['value'])
-			} else {}
-		} else {}
-	}
-	ans$isotopeError <- seq(ans$isotopeError[1], ans$isotopeError[2])
-	ans$enzyme <- xmlAttrs(rootMZID[['AnalysisProtocolCollection']][['SpectrumIdentificationProtocol']][['Enzymes']][['Enzyme']][['EnzymeName']][['cvParam']])['name']
-	tolerance <- xmlApply(rootMZID[['AnalysisProtocolCollection']][['SpectrumIdentificationProtocol']][['ParentTolerance']], function(x){
-				ans <- as.numeric(xmlAttrs(x)['value'])
-				if(xmlAttrs(x)['name'] == 'search tolerance plus value'){
-					names(ans) <- 'high'
-				} else if(xmlAttrs(x)['name'] == "search tolerance minus value"){
-					names(ans) <- 'low'
-				} else {}
-				ans
-			})
-	names(tolerance) <- NULL
-	tolerance <- as.list(unlist(tolerance))
-	tolUnit <- xmlAttrs(rootMZID[['AnalysisProtocolCollection']][['SpectrumIdentificationProtocol']][['ParentTolerance']][['cvParam']])['unitName']
-	if(tolower(tolUnit) == 'parts per million'){
-		tolerance$unit <- 'ppm'
-	} else if(tolower(tolUnit) == 'dalton'){
-		tolerance$unit <- 'Da'
-	} else {}
-	ans$tolerance <- tolerance
-	modifications <- xmlApply(rootMZID[['AnalysisProtocolCollection']][['SpectrumIdentificationProtocol']][['ModificationParams']], function(x){
-		ans <- list()
-		ans$residues <- sub('\\.', '*', xmlAttrs(x)['residues'])
-		ans$mass <- as.numeric(xmlAttrs(x)['massDelta'])
-		ans$type <- if(as.logical(xmlAttrs(x)['fixedMod'])) 'fix' else 'opt'
-		ans$name <- xmlAttrs(x[['cvParam']])['name']
-		if(is.null(x[['SpecificityRules']])){
-			ans$position <- 'any'
-		} else {
-			if(xmlAttrs(x[['SpecificityRules']][['cvParam']])['name'] == 'modification specificity protein N-term'){
-				ans$position <- 'prot-N-term'
-			} else if(xmlAttrs(x[['SpecificityRules']][['cvParam']])['name'] == 'modification specificity protein C-term'){
-				ans$position <- 'prot-C-term'
-			} else if(xmlAttrs(x[['SpecificityRules']][['cvParam']])['name'] == 'modification specificity N-term'){
-				ans$position <- 'N-term'
-			} else if(xmlAttrs(x[['SpecificityRules']][['cvParam']])['name'] == 'modification specificity C-term'){
-				ans$position <- 'C-term'
-			} else {}
-		}
-		do.call('msgfParModification', ans)
-	})
-	modifications <- list(nMod=2, modifications=modifications)
-	ans$modification <- modifications
-	free(parsedMZID)
+    
+    ans$tda <- parameters@parameters$TargetDecoyApproach
+    ans$isotopeError <- seq(parameters@parameters$MinIsotopeError, parameters@parameters$MaxIsotopeError)
+    ans$fragmentation <- as.character(parameters@parameters$FragmentMethod)
+    ans$instrument <- as.character(parameters@parameters$Instrument)
+    ans$ntt <- parameters@parameters$NumTolerableTermini
+    ans$matches <- parameters@parameters$NumMatchesPerSpec
+    ans$lengthRange <- c(parameters@parameters$MinPepLength, parameters@parameters$MaxPepLength)
+    ans$chargeRange <- c(parameters@parameters$MinCharge, parameters@parameters$MaxCharge)
+	ans$enzyme <- parameters@parameters$enzymes$name
+    ans$tolerance <- list(
+        high=parameters@parameters$ParentTolerance$value[grepl('search tolerance plus value', parameters@parameters$ParentTolerance$name)],
+        low=parameters@parameters$ParentTolerance$value[grepl('search tolerance minus value', parameters@parameters$ParentTolerance$name)],
+        unit=ifelse(tolower(parameters@parameters$ParentTolerance$unitName[1]) == 'parts per million', 'ppm',
+                    ifelse(tolower(parameters@parameters$ParentTolerance$unitName[1]) == 'dalton', 'Da', NULL)
+                    )
+        )
+    modifications <- apply(parameters@parameters$ModificationRules, 1, function(x) {
+        x <- lapply(x, type.convert)
+        try(msgfParModification(
+            name=as.character(x$name), 
+            mass=x$massDelta, 
+            residues=as.character(x$residues), 
+            type=ifelse(x$fixedMod, 'fix', 'opt'), 
+            position=ifelse(x$Specificity == 'any', 'any', ifelse(x$Specificity == 'modification specificity N-term', 'N-term')))
+        )}
+    )
+    if (any(sapply(modifications, function(x) {inherits(x, 'try-error')}))) {
+        warning('Some modification rules removed due to bad formating')
+    }
+    modifications <- modifications[sapply(modifications, function(x) {!inherits(x, 'try-error')})]
+	ans$modification <- list(nMod=2, modifications=modifications)
 	do.call('msgfPar', ans)
 }
