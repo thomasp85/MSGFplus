@@ -7,6 +7,7 @@ Maintainer: Thomas Dybdal Pedersen <thomasp85@gmail.com>
 Description: This package contains function to perform peptide identification
     using MS-GF+
 License: GPL (>= 2)
+SystemRequirements: Java (>= 1.7)
 LazyLoad: yes
 Depends:
     methods,
