@@ -431,7 +431,7 @@ msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instr
 #' 
 #' @seealso \code{\link{msgfPar-class}}
 #' 
-#' @importFrom XML docType
+#' @importFrom XML docName
 #' 
 #' @export
 #' 
