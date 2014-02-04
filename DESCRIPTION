@@ -1,7 +1,7 @@
 Package: MSGFplus
 Type: Package
-Title: A package to run MS GF+ through R
-Version: 0.0-3
+Title: An interface between R and MS-GF+
+Version: 0.1.0
 Author: Thomas Dybdal Pedersen
 Maintainer: Thomas Dybdal Pedersen <thomasp85@gmail.com>
 Description: This package contains function to perform peptide identification
