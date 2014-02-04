@@ -45,14 +45,6 @@ setGeneric(
 		'database<-',
 		def=function(object, value){standardGeneric('database<-')}
 )
-setGeneric(
-		'checkResFile',
-		def=function(object){standardGeneric('checkResFile')}
-)
-setGeneric(
-		'analysisSoftwareVersion',
-		def=function(object){standardGeneric('analysisSoftwareVersion')}
-)
 
 #' Start an MSGF+ analysis based on an msgfPar object
 #' 
