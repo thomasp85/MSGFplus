@@ -1,3 +1,4 @@
+#' @include aaa.R
 #' @include generics.R
 #' @include msgfParChargeRange.R
 #' @include msgfParEnzyme.R
