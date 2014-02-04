@@ -79,11 +79,11 @@ setClass(
 	validity=function(object){
 		if(object@database != ''){
 			if(!file.exists(object@database)){
-				stop('No file at specified location')
+				return('No file at specified location')
 			} else {}
 			splitName <- strsplit(object@database, '\\.')[[1]]
 			if(!splitName[length(splitName)] %in% c('fasta', 'fa')){
-				stop('Database must be a fasta file')
+				return('Database must be a fasta file')
 			}	
 		}
 		return(TRUE)
