@@ -12,7 +12,8 @@ LazyLoad: yes
 Depends:
     methods
 Imports:
-    mzID
+    mzID,
+    XML
 Suggests:
     gWidgets
 Collate:
