@@ -18,5 +18,5 @@ createFileCall <- function(rawfile, savename){
 }
 
 printMSGFLicense <- function() {
-    writeLines(readLines(R.home(component='library/MSGFplus/inst/MSGFPlus/LICENSE.txt')))
+    writeLines(readLines(R.home(component='library/MSGFplus/MSGFPlus/LICENSE.txt')))
 }
