@@ -215,7 +215,7 @@ setMethod(
     'runMSGF', 'msgfPar',
     function(object, rawfiles, savenames, import=TRUE, memory=10000, msgfPath){
         if(missing(msgfPath)) {
-            msgfPath <- R.home(component='library/MSGFplus/java/MSGFplus.jar')
+            msgfPath <- R.home(component='library/MSGFPlus/MSGFPlus.jar')
         } else {}
         if(!missing(savenames) && length(rawfiles) != length(savenames)){
             stop('Number of raw files must correspond to number of savenames')
