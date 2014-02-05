@@ -21,7 +21,7 @@ setClass(
 		)
 )
 instrumentLookup <- function(){
-	data.frame(Index=0:3, Description=c('Low-res LCQ/LTQ', 'High-res LTQ', 'TOF', 'Q-Exactive'))
+	data.frame(Index=0:3, Description=c('LowRes', 'HighRes', 'TOF', 'QExactive'))
 }
 setMethod(
 		'show', 'msgfParInstrument',

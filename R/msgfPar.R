@@ -289,10 +289,10 @@ setMethod(
 #' 
 #' Instrument can likewise be specified as an integer or as a name according to this list
 #' \describe{
-#'   \item{0}{Low-res LCQ/LTQ}
-#'   \item{1}{High-res LTQ}
+#'   \item{0}{LowRes}
+#'   \item{1}{HighRes}
 #'   \item{2}{TOF}
-#'   \item{3}{Q-Exactive}
+#'   \item{3}{QExactive}
 #' }
 #' 
 #' Enymes are specified in the same manner using the following list
