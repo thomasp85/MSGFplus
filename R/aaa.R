@@ -14,7 +14,7 @@ createFileCall <- function(rawfile, savename){
         rawfile <- gsub(' ', '\\ ', rawfile, fixed=T)
         savename <- gsub(' ', '\\ ', savename, fixed=T)
     }
-    paste0('-s ', rawfile, ' -o ', savename, ' -d', database)
+    paste0('-s ', rawfile, ' -o ', savename)
 }
 
 printMSGFLicense <- function() {
