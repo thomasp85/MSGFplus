@@ -65,5 +65,5 @@ setGeneric(
 #' 
 setGeneric(
   'runMSGF',
-  def=function(object, ...){standardGeneric('runMSGF')}
+  def=function(object, rawfiles, savenames, import, memory, msgfPath){standardGeneric('runMSGF')}
 )
