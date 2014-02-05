@@ -212,31 +212,36 @@ setReplaceMethod(
 #' @rdname runMSGF-methods
 #' 
 setMethod(
-  'runMSGF', 'msgfPar',
-  function(object, rawfiles, savenames, import=TRUE, memory=10000){
-    if(length(rawfiles) != length(savenames) & !missing(savenames)){
-      stop('Number of raw files must correspond to number of savenames')
-    } else {}
-    systemCall <- getMSGFpar(object)
-    if(missing(savenames)){
-      savenames <- paste(sapply(strsplit(rawfiles,"\\."), function(x) paste(x[1:(length(x)-1)], collapse=".")), '.mzid', sep='')
-    } else{}
-    for(i in 1:length(rawfiles)){
-      if(basename(savenames[i]) == savenames[i]){
-        savenames[i] <- file.path(getwd(), savenames[i])
-      }
-      fileCall <- createFileCall(rawfiles[i], savenames[i], database[i])
-      systemCall <- paste0('java -Xmx', memory, 'M -jar ', R.home(component='library/MSGFplus/java/MSGFplus.jar'), ' ', fileCall, ' ', systemCall)
-      system(systemCall)
+    'runMSGF', 'msgfPar',
+    function(object, rawfiles, savenames, import=TRUE, memory=10000, msgfPath){
+        if(missing(msgfPath)) {
+            msgfPath <- R.home(component='library/MSGFplus/java/MSGFplus.jar')
+        } else {}
+        if(!missing(savenames) && length(rawfiles) != length(savenames)){
+            stop('Number of raw files must correspond to number of savenames')
+        } else {}
+        systemCall <- getMSGFpar(object)
+        if(missing(savenames)){
+            savenames <- paste(sapply(strsplit(rawfiles,"\\."), function(x) paste(x[1:(length(x)-1)], collapse=".")), '.mzid', sep='')
+        } else{}
+        for(i in 1:length(rawfiles)){
+            if(basename(savenames[i]) == savenames[i]){
+                savenames[i] <- file.path(getwd(), savenames[i])
+            }
+            fileCall <- createFileCall(rawfiles[i], savenames[i])
+            systemCall <- paste0('java -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', systemCall)
+            system(systemCall)
+        }
+        if(import){
+            ans <- list()
+            for(i in 1:length(savenames)){
+                ans[[i]] <- mzID(savenames[i])
+            }
+            ans
+        } else {
+            NULL
+        }
     }
-    if(import){
-      ans <- list()
-      for(i in 1:length(savenames)){
-        ans[[i]] <- mzID(savenames[i])
-      }
-      ans
-    }
-  }
 )
 
 #' Constructor for the msgfPar class
