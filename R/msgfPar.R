@@ -431,12 +431,12 @@ msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instr
 #' 
 #' @seealso \code{\link{msgfPar-class}}
 #' 
-#' @importFrom XML docName
+#' @importFrom mzID mzIDparameters
 #' 
 #' @export
 #' 
 msgfParFromID <- function(file){
-    parameters <- mzID:::mzIDparameters(path=file)
+    parameters <- mzIDparameters(path=file)
     if (parameters@software$name[parameters@software$id == 'ID_software'] != 'MS-GF+') {
         stop('Parameters can only be imported if result file has been processed with MS-GF+')
     }
