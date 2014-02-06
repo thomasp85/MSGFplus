@@ -219,16 +219,19 @@ setMethod(
         if(!missing(savenames) && length(rawfiles) != length(savenames)){
             stop('Number of raw files must correspond to number of savenames')
         } else {}
-        systemCall <- getMSGFpar(object)
         if(missing(savenames)){
             savenames <- paste(sapply(strsplit(rawfiles,"\\."), function(x) paste(x[1:(length(x)-1)], collapse=".")), '.mzid', sep='')
         } else{}
+        
+        parameterCall <- getMSGFpar(object)
+        
         for(i in 1:length(rawfiles)){
             if(basename(savenames[i]) == savenames[i]){
                 savenames[i] <- file.path(getwd(), savenames[i])
             }
             fileCall <- createFileCall(rawfiles[i], savenames[i])
-            systemCall <- paste0('java -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', systemCall)
+            systemCall <- paste0('java -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', parameterCall)
+            cat(systemCall)
             system(systemCall)
         }
         if(import){
