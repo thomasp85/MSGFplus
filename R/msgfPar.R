@@ -207,6 +207,12 @@ setReplaceMethod(
 setMethod(
     'runMSGF', 'msgfPar',
     function(object, rawfiles, savenames, import=TRUE, memory=10000, msgfPath){
+        if(missing(import)) {
+            import <- TRUE
+        } else {}
+        if(missing(memory)) {
+            memory=10000
+        } else {}
         if(missing(msgfPath)) {
             msgfPath <- R.home(component='library/MSGFplus/MSGFPlus/MSGFPlus.jar')
         } else {}
