@@ -200,14 +200,7 @@ setReplaceMethod(
 	}
 )
 
-#' @param rawfiles A character vector holding the filepath to the spectrum files to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2, *.pkl or *_dta.txt)
-#' 
-#' @param savenames An optinal vector of same length as rawfiles. Specifies the name used to save the results. If omitted the results will be saved with the same name as the rawfile, but with an .mzid extension.
-#' 
-#' @param import Logical (default=TRUE). Should the results be imported in to R after the analysis is finished.
-#' 
-#' @param memory An integer (default=10000). How much memory should be allocated to the java virtual machine during execution (in mb)
-#' 
+
 #' @importFrom mzID mzID
 #' @rdname runMSGF-methods
 #' 
@@ -215,7 +208,7 @@ setMethod(
     'runMSGF', 'msgfPar',
     function(object, rawfiles, savenames, import=TRUE, memory=10000, msgfPath){
         if(missing(msgfPath)) {
-            msgfPath <- R.home(component='library/MSGFPlus/MSGFPlus.jar')
+            msgfPath <- R.home(component='library/MSGFplus/MSGFPlus/MSGFPlus.jar')
         } else {}
         if(!missing(savenames) && length(rawfiles) != length(savenames)){
             stop('Number of raw files must correspond to number of savenames')
