@@ -48,15 +48,26 @@ setGeneric(
 		def=function(object, value){standardGeneric('database<-')}
 )
 
-#' Start an MSGF+ analysis based on an msgfPar object
+#' Runs MS-GF+ based on the given msgfPar object
 #' 
-#' This function extracts the parameters defined in an msgfPar object and starts
-#' an MSGF+ analysis through a system() call
+#' This function assembles a system call based on the parameters specified in
+#' the object and the arguments given in the function call. By default the
+#' function uses the MS-GF+ jar file bundled with this package, but it is
+#' possible to specify an alternative location using the msgfPar argument.
+#' Version compatibility can not be assured in this case though.
 #' 
-#' @param object An msgfPar object
+#' @param rawfiles A character vector holding the filepath to the spectrum files to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2, *.pkl or *_dta.txt)
 #' 
-#' @return If the result of the analysis is imported, a list of mzID objects
+#' @param savenames An optinal vector of same length as rawfiles. Specifies the name used to save the results. If omitted the results will be saved with the same name as the rawfile, but with an .mzid extension.
 #' 
+#' @param import Logical (default=TRUE). Should the results be imported in to R after the analysis is finished.
+#' 
+#' @param memory An integer (default=10000). How much memory should be allocated to the java virtual machine during execution (in mb)
+#' 
+#' @param msgfPath The path to an alternative MSGFPlus.jar file if the bundled one is not desired
+#' 
+#' @return If import=TRUE a list of mzID object otherwise NULL
+#'  
 #' @export
 #' 
 #' @docType methods
