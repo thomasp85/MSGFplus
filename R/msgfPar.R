@@ -235,9 +235,8 @@ setMethod(
             system(systemCall)
         }
         if(import){
-            ans <- list()
             for(i in 1:length(savenames)){
-                ans[[i]] <- mzID(savenames[i])
+                ans <- mzID(savenames)
             }
             ans
         } else {
