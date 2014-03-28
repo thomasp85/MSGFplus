@@ -8,6 +8,10 @@ tool MS-GF+ and provides means of running peptide searches
 from within R with automatic result import and easy
 handling of parameters.
 }
+\details{
+The version bundled with this package is: MS-GF+ Beta
+(v9881) (11/11/2013)
+}
 \author{
 Thomas Dybdal Pedersen with contributions from Laurent
 Gatto

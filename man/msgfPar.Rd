@@ -77,9 +77,8 @@ precursor} } It is possible to use the full name of the
 description for a more litteral function call
 
 Instrument can likewise be specified as an integer or as a
-name according to this list \describe{ \item{0}{Low-res
-LCQ/LTQ} \item{1}{High-res LTQ} \item{2}{TOF}
-\item{3}{Q-Exactive} }
+name according to this list \describe{ \item{0}{LowRes}
+\item{1}{HighRes} \item{2}{TOF} \item{3}{QExactive} }
 
 Enymes are specified in the same manner using the following
 list \describe{ \item{0}{Unspecific cleavage}

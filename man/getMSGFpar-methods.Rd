@@ -2,11 +2,14 @@
 \name{getMSGFpar}
 \alias{getMSGFpar}
 \alias{getMSGFpar,msgfPar-method}
+\alias{getMSGFpar,msgfParChargeRange-method}
 \title{Get a string representation of an msgfPar-related object}
 \usage{
 getMSGFpar(object)
 
 \S4method{getMSGFpar}{msgfPar}(object)
+
+\S4method{getMSGFpar}{msgfParChargeRange}(object)
 }
 \arguments{
   \item{object}{An msgfPar object or a related object}
