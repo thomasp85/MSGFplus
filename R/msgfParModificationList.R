@@ -51,7 +51,7 @@ setMethod(
 		'getMSGFpar', 'msgfParModificationList',
 		function(object){
 			if(length(object) != 0){
-				modFile <- R.home(component='library/MSGFplus/modification_temp.txt')
+				modFile <- file.path(system.file(package='MSGFplus'), 'modification_temp.txt')
 				unlink(modFile, force=TRUE)
 				sink(modFile)
 				cat('NumMods=', object@nMod, sep='')

@@ -214,7 +214,7 @@ setMethod(
             memory=10000
         } else {}
         if(missing(msgfPath)) {
-            msgfPath <- R.home(component='library/MSGFplus/MSGFPlus/MSGFPlus.jar')
+            msgfPath <- system.file(package='MSGFplus', 'MSGFPlus', 'MSGFPlus.jar')
         } else {}
         if(!missing(savenames) && length(rawfiles) != length(savenames)){
             stop('Number of raw files must correspond to number of savenames')

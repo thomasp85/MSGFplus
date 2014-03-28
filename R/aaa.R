@@ -18,6 +18,9 @@ createFileCall <- function(rawfile, savename){
 }
 
 printMSGFLicense <- function() {
-    cat('                 -=<( MS-GF+ License )>=-\n\n')
-    writeLines(readLines(R.home(component='library/MSGFplus/MSGFPlus/LICENSE.txt')))
+    license <- system.file(package='MSGFplus', 'MSGFPlus', 'LICENSE.txt')
+    if(license != '') {
+        cat('                 -=<( MS-GF+ License )>=-\n\n')
+        writeLines(readLines(license))
+    }
 }
