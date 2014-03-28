@@ -50,7 +50,7 @@ setMethod(
 			if(length(object) == 0){
 				''
 			} else {
-				paste('-p ', object@protocol, sep='')
+				paste('-protocol ', object@protocol, sep='')
 			}
 		}
 )
