@@ -1,9 +1,17 @@
-# TODO: Add comment
-# 
-# Author: Thomas
-###############################################################################
-
-
+#' A class handling charge ranges
+#' 
+#' This class defines a charge range and provides methods to get correct system
+#' call parameters.
+#' 
+#' @name msgfParChargeRange-class
+#' 
+#' @section Slots:
+#' \describe{
+#'  \item{\code{value}:}{A numeric vector of length 2 describing the upper and lower bounds of the charge range}
+#' }
+#' 
+#' @rdname msgfParChargeRange-class
+#' 
 setClass(
 		Class='msgfParChargeRange',
 		representation=representation(
@@ -44,6 +52,8 @@ setMethod(
 			}
 		}
 )
+#' @rdname getMSGFpar-methods
+#' 
 setMethod(
 		'getMSGFpar', 'msgfParChargeRange',
 		function(object){
