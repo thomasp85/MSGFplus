@@ -60,6 +60,9 @@ setMethod(
 			cat(object@name, ':\t', if(object@composition != '') object@composition else object@mass, ', ', object@residues, ', ', object@type, ', ', object@position, '\n', sep='')
 		}
 )
+
+#' @export
+#' 
 msgfParModification <- function(name, composition='', mass=as.numeric(NA), residues, type, position){
   if(type == 'fixed') type <- 'fix'
   if(type == 'optinal') type <- 'opt'
