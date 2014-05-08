@@ -485,6 +485,6 @@ msgfParFromID <- function(file){
         warning('Some modification rules removed due to bad formating')
     }
     modifications <- modifications[sapply(modifications, function(x) {!inherits(x, 'try-error')})]
-	ans$modification <- list(nMod=2, modifications=modifications)
+	ans$modification <- list(nMod=parameters@parameters$MaxNumModifications, modifications=modifications)
 	do.call('msgfPar', ans)
 }
