@@ -62,8 +62,8 @@ msgfParProtocol <- function(protocol){
 		if(is.numeric(protocol)){
 			new(Class='msgfParProtocol', protocol=protocol)
 		} else if(is.character(protocol)){
-			if(protocol %in% protocolLookup()$Description){
-				protocol <- protocolLookup()$Index[protocolLookup()$Description == protocol]
+			if(tolower(protocol) %in% tolower(protocolLookup()$Description)){
+				protocol <- protocolLookup()$Index[tolower(protocolLookup()$Description) == tolower(protocol)]
 				new(Class='msgfParProtocol', protocol=protocol)
 			} else stop('Unknown protocol')
 		} else stop('protocol must be either numeric or string')		

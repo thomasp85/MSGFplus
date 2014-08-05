@@ -10,6 +10,6 @@
 #' 
 #' @import methods
 #' @docType package
-#' @name mzID-package
+#' @name MSGFplus-package
 #' 
 NULL

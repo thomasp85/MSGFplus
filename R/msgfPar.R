@@ -119,6 +119,8 @@ setClass(
 #' 
 #' @seealso \code{\link{msgfPar-class}}
 #' 
+#' @noRd
+#' 
 setMethod(
 	'show', 'msgfPar',
 	function(object){
@@ -154,6 +156,8 @@ setMethod(
 #' 
 #' @seealso \code{\link{msgfPar-class}}
 #' 
+#' @noRd
+#' 
 setMethod(
 	'length', 'msgfPar',
 	function(x){
@@ -165,7 +169,9 @@ setMethod(
 	}
 )
 
-#' @rdname getMSGFpar-methods
+#' see getMSGFpar-methods
+#' 
+#' @noRd
 #' 
 setMethod(
 	'getMSGFpar', 'msgfPar',
@@ -183,35 +189,23 @@ setMethod(
 	}
 )
 
-#' @rdname database-methods
+#' see runMSGF-methods
 #' 
-setMethod(
-	'database', 'msgfPar',
-	function(object){
-		object@database
-	}
-)
-setReplaceMethod(
-	'database', 'msgfPar',
-	function(object, value){
-		object@database <- value
-		validObject(object)
-		object
-	}
-)
-
-
 #' @importFrom mzID mzID
-#' @rdname runMSGF-methods
+#' 
+#' @noRd
 #' 
 setMethod(
     'runMSGF', 'msgfPar',
-    function(object, rawfiles, savenames, import=TRUE, memory=10000, msgfPath){
+    function(object, rawfiles, savenames, import=TRUE, memory=10000, async=FALSE, msgfPath){
         if(missing(import)) {
             import <- TRUE
         } else {}
         if(missing(memory)) {
             memory=10000
+        } else {}
+        if(missing(async)) {
+            async=FALSE
         } else {}
         if(missing(msgfPath)) {
             msgfPath <- system.file(package='MSGFplus', 'MSGFPlus', 'MSGFPlus.jar')
@@ -224,6 +218,19 @@ setMethod(
         } else{}
         
         parameterCall <- getMSGFpar(object)
+        
+        if(async) {
+            if(length(rawfiles) > 1) warning('Multiple rawfiles. Only the first will be used when running with "async=TRUE"')
+            
+            if(basename(savenames[1]) == savenames[1]){
+                savenames[1] <- file.path(getwd(), savenames[1])
+            }
+            fileCall <- createFileCall(rawfiles[1], savenames[1])
+            systemCall <- paste0('java -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', parameterCall)
+            checkfile <- tempfile('checkfile', fileext='.txt')
+            system(paste0(systemCall, ' && echo "">', checkfile), wait=FALSE, ignore.stdout=TRUE, ignore.stderr=TRUE)
+            return(new('msgfAsync', checkfile, savenames[1]))
+        }
         
         for(i in 1:length(rawfiles)){
             if(basename(savenames[i]) == savenames[i]){
@@ -257,7 +264,7 @@ setMethod(
 #' 
 #' @param database The location of the fasta file to use as search database
 #' 
-#' @param tolerance The parent ion tolerance to use. In simple cases a string in the form '20ppm' or '1Da' or an msgfParTolerance object if asymmetric tolerance is desired
+#' @param tolerance The parent ion tolerance to use. In simple cases a string in the form '20 ppm' or '1 Da' or an msgfParTolerance object if asymmetric tolerance is desired
 #' 
 #' @param isotopeError The range of isotope errors used to correct for non-monoisotopic peaks. Either a numeric vector of length 2 specifying the lower and upper bounds of the range, or an msgfParIsotopeError object
 #' 
@@ -331,94 +338,80 @@ setMethod(
 #' 
 msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instrument, enzyme, protocol, ntt, modification, lengthRange, chargeRange, matches){
 	if(missing(database)) database <- ''
-	call <- list()
-	call$Class <- 'msgfPar'
-	call$database <- database
+    par <- new('msgfPar', database=database)
 	if(!missing(tolerance)){
-		if(class(tolerance) == 'msgfParTolerance'){
-			call$tolerance <- tolerance
-		} else {
-			call$tolerance <- do.call('msgfParTolerance', as.list(tolerance))
-		}
+        if(class(tolerance) == 'list') {
+            tolerance <- do.call('msgfParTolerance', tolerance)
+        }
+        tolerance(par) <- tolerance
 	} else {}
 	if(!missing(isotopeError)){
-		if(class(isotopeError) == 'msgfParIsotopeError'){
-			call$isotopeError <- isotopeError
-		} else {
-			call$isotopeError <- msgfParIsotopeError(unlist(isotopeError))
-		}
+	    if(class(isotopeError) == 'list') {
+	        isotopeError <- do.call('msgfParIsotopeError', isotopeError)
+	    }
+	    isotopeError(par) <- isotopeError
 	} else {}
 	if(!missing(tda)){
-		if(class(tda) == 'msgfParTda'){
-			call$tda <- tda
-		} else {
-			call$tda <- msgfParTda(unlist(tda))
-		}
+	    if(class(tda) == 'list') {
+	        tda <- do.call('msgfParTda', tda)
+	    }
+	    tda(par) <- tda
 	} else {}
 	if(!missing(fragmentation)){
-		if(class(fragmentation) == 'msgfParFragmentation'){
-			call$fragmentation <- fragmentation
-		} else {
-			call$fragmentation <- msgfParFragmentation(unlist(fragmentation))
-		}
+	    if(class(fragmentation) == 'list') {
+	        fragmentation <- do.call('msgfParFragmentation', fragmentation)
+	    }
+	    fragmentation(par) <- fragmentation
 	} else {}
 	if(!missing(instrument)){
-		if(class(instrument) == 'msgfParInstrument'){
-			call$instrument <- instrument
-		} else {
-			call$instrument <- msgfParInstrument(unlist(instrument))
-		}
+	    if(class(instrument) == 'list') {
+	        instrument <- do.call('msgfParInstrument', instrument)
+	    }
+	    instrument(par) <- instrument
 	} else {}
 	if(!missing(enzyme)){
-		if(class(enzyme) == 'msgfParEnzyme'){
-			call$enzyme <- enzyme
-		} else {
-			call$enzyme <- msgfParEnzyme(unlist(enzyme))
-		}
+	    if(class(enzyme) == 'list') {
+	        enzyme <- do.call('msgfParEnzyme', enzyme)
+	    }
+	    enzyme(par) <- enzyme
 	} else {}
 	if(!missing(protocol)){
-		if(class(protocol) == 'msgfParProtocol'){
-			call$protocol <- protocol
-		} else {
-			call$protocol <- msgfParProtocol(unlist(protocol))
-		}
+	    if(class(protocol) == 'list') {
+	        protocol <- do.call('msgfParProtocol', protocol)
+	    }
+	    protocol(par) <- protocol
 	} else {}
 	if(!missing(ntt)){
-		if(class(ntt) == 'msgfParNtt'){
-			call$ntt <- ntt
-		} else {
-			call$ntt <- msgfParNtt(unlist(ntt))
-		}
+	    if(class(ntt) == 'list') {
+	        ntt <- do.call('msgfParNtt', ntt)
+	    }
+	    ntt(par) <- ntt
 	} else {}
 	if(!missing(modification)){
-		if(class(modification) == 'msgfParModificationList'){
-			call$modification <- modification
-		} else {
-			call$modification <- do.call('msgfParModificationList', modification)
-		}
+	    if(class(modification) == 'list') {
+	        modification <- do.call('msgfParModificationList', modification)
+	    }
+	    modifications(par) <- modification
 	} else {}
 	if(!missing(lengthRange)){
-		if(class(lengthRange) == 'msgfParLengthRange'){
-			call$lengthRange <- lengthRange
-		} else {
-			call$lengthRange <- msgfParLengthRange(unlist(lengthRange))
-		}
+	    if(class(lengthRange) == 'list') {
+	        lengthRange <- do.call('msgfParLengthRange', lengthRange)
+	    }
+	    lengthRange(par) <- lengthRange
 	} else {}
 	if(!missing(chargeRange)){
-		if(class(chargeRange) == 'msgfParChargeRange'){
-			call$chargeRange <- chargeRange
-		} else {
-			call$chargeRange <- msgfParChargeRange(unlist(chargeRange))
-		}
+	    if(class(chargeRange) == 'list') {
+	        chargeRange <- do.call('msgfParLengthRange', chargeRange)
+	    }
+	    chargeRange(par) <- chargeRange
 	} else {}
 	if(!missing(matches)){
-		if(class(matches) == 'msgfParMatches'){
-			call$matches <- matches
-		} else {
-			call$matches <- msgfParMatches(unlist(matches))
-		}
+	    if(class(matches) == 'list') {
+	        matches <- do.call('msgfParLengthRange', matches)
+	    }
+	    matches(par) <- matches
 	} else {}
-	do.call('new', call)
+    par
 }
 
 #' Extract parameters from mzIdentML result file
@@ -435,7 +428,7 @@ msgfPar <- function(database, tolerance, isotopeError, tda, fragmentation, instr
 #' 
 #' @return An msgfPar object with parameters matching the input file
 #' 
-#' @seealso \code{\link{msgfPar-class}}
+#' @seealso \code{\link{msgfPar-class}} \code{\link{msgfPar}}
 #' 
 #' @importFrom mzID mzIDparameters
 #' 
@@ -457,8 +450,8 @@ msgfParFromID <- function(file){
     
     ans$tda <- parameters@parameters$TargetDecoyApproach
     ans$isotopeError <- seq(parameters@parameters$MinIsotopeError, parameters@parameters$MaxIsotopeError)
-    ans$fragmentation <- as.character(parameters@parameters$FragmentMethod)
-    ans$instrument <- as.character(parameters@parameters$Instrument)
+    ans$fragmentation <- parameters@parameters$FragmentMethod
+    ans$instrument <- parameters@parameters$Instrument
     ans$ntt <- parameters@parameters$NumTolerableTermini
     ans$matches <- parameters@parameters$NumMatchesPerSpec
     ans$lengthRange <- c(parameters@parameters$MinPepLength, parameters@parameters$MaxPepLength)
@@ -471,14 +464,23 @@ msgfParFromID <- function(file){
                     ifelse(tolower(parameters@parameters$ParentTolerance$unitName[1]) == 'dalton', 'Da', NULL)
                     )
         )
-    modifications <- apply(parameters@parameters$ModificationRules, 1, function(x) {
-        x <- lapply(x, type.convert)
+    mod <- parameters@parameters$ModificationRules
+    modifications <- sapply(1:nrow(mod), function(i) {
         try(msgfParModification(
-            name=as.character(x$name), 
-            mass=x$massDelta, 
-            residues=as.character(x$residues), 
-            type=ifelse(x$fixedMod, 'fix', 'opt'), 
-            position=ifelse(x$Specificity == 'any', 'any', ifelse(x$Specificity == 'modification specificity N-term', 'N-term')))
+            name=as.character(mod$name[i]), 
+            mass=mod$massDelta[i], 
+            residues=as.character(mod$residues[i]), 
+            type=ifelse(mod$fixedMod[i], 'fix', 'opt'), 
+            position=ifelse(tolower(mod$Specificity[i]) == 'any', 'any', 
+                            ifelse(tolower(mod$Specificity[i]) == 'modification specificity n-term', 'N-term',
+                                   ifelse(tolower(mod$Specificity[i]) == 'modification specificity c-term', 'C-term',
+                                          ifelse(tolower(mod$Specificity[i]) == 'modification specificity prot-n-term', 'Prot-n-term',
+                                                 ifelse(tolower(mod$Specificity[i]) == 'modification specificity prot-c-term', 'Prot-c-term', NA)
+                                                 )
+                                          )
+                                   )
+                            )
+            )
         )}
     )
     if (any(sapply(modifications, function(x) {inherits(x, 'try-error')}))) {

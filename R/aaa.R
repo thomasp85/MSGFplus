@@ -6,6 +6,8 @@
 #' 
 #' @return A character vector that is compatible with the OS that can be concatenated with the MS-GF+ call
 #' 
+#' @noRd
+#' 
 createFileCall <- function(rawfile, savename){
     if(Sys.info()["sysname"] == 'Windows'){
         rawfile <- paste0('\"', rawfile, '\"')
@@ -17,6 +19,12 @@ createFileCall <- function(rawfile, savename){
     paste0('-s ', rawfile, ' -o ', savename)
 }
 
+#' Print the MS-GF+ license
+#' 
+#' This function pipes the content of the MS-GF+ LICENCE file into the stdin of R
+#' 
+#' @noRd
+#' 
 printMSGFLicense <- function() {
     license <- system.file(package='MSGFplus', 'MSGFPlus', 'LICENSE.txt')
     if(license != '') {

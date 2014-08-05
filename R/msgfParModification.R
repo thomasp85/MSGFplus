@@ -1,9 +1,3 @@
-# TODO: Add comment
-# 
-# Author: Thomas
-###############################################################################
-
-
 setClass(
 		'msgfParModification',
 		representation=representation(
@@ -20,8 +14,8 @@ setClass(
 					stop('Either mass or composition must be specified')
 				} else {}
 			} else {
-				compSplit <- gregexpr('[- | \\d]+', object@composition, perl=T)
-				if(!all(regmatches(object@composition, compSplit, invert=T)[[1]] %in% c('C', 'H', 'N', 'O', 'S', 'P', 'Br', 'Cl', 'Fe', ''))){
+				compSplit <- gregexpr('[A-Z][a-z]?', object@composition, perl=T)
+				if(!all(regmatches(object@composition, compSplit)[[1]] %in% c('C', 'H', 'N', 'O', 'S', 'P', 'Br', 'Cl', 'Fe', ''))){
 					stop('Modification must consist of only \'C\', \'H\', \'N\', \'O\', \'S\', \'P\', \'Br\', \'Cl\' and \'Fe\'')
 				} else {}
 			}
@@ -65,6 +59,6 @@ setMethod(
 #' 
 msgfParModification <- function(name, composition='', mass=as.numeric(NA), residues, type, position){
   if(type == 'fixed') type <- 'fix'
-  if(type == 'optinal') type <- 'opt'
+  if(type == 'optional') type <- 'opt'
 	new(Class='msgfParModification', name=name, composition=composition, mass=mass, residues=residues, type=type, position=position)
 }

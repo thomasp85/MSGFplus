@@ -62,8 +62,8 @@ msgfParInstrument <- function(instrument){
 		if(is.numeric(instrument)){
 			new(Class='msgfParInstrument', instrument=instrument)
 		} else if(is.character(instrument)){
-			if(instrument %in% instrumentLookup()$Description){
-				instrument <- instrumentLookup()$Index[instrumentLookup()$Description == instrument]
+			if(tolower(instrument) %in% tolower(instrumentLookup()$Description)){
+				instrument <- instrumentLookup()$Index[tolower(instrumentLookup()$Description) == tolower(instrument)]
 				new(Class='msgfParInstrument', instrument=instrument)
 			} else stop('Unknown Instrument')
 		} else stop('method must be either numeric or string')

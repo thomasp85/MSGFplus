@@ -1,8 +1,5 @@
-# TODO: Add comment
-# 
-# Author: Thomas
-###############################################################################
-
+#' @include msgfParModification.R
+NULL
 
 setClass(
 		'msgfParModificationList',
@@ -54,7 +51,7 @@ setMethod(
 				modFile <- file.path(system.file(package='MSGFplus'), 'modification_temp.txt')
 				unlink(modFile, force=TRUE)
 				sink(modFile)
-				cat('NumMods=', object@nMod, sep='')
+				cat('NumMods=', if(is.na(object@nMod)) 2 else object@nMod, sep='')
 				cat('\n\n')
 				for(i in 1:length(object)){
 					par <- getMSGFpar(object@modifications[[i]])
@@ -67,6 +64,19 @@ setMethod(
 				''
 			}			
 		}
+)
+setMethod(
+    '[[', c('msgfParModificationList', 'numeric', 'missing'),
+    function(x, i, j, ...) {
+        x@modifications[[i]]
+    }
+)
+setReplaceMethod(
+    '[[', c('msgfParModificationList', 'numeric', 'missing', 'msgfParModification'),
+    function(x, i, j, ..., value) {
+        x@modifications[[i]] <- value
+        x
+    }
 )
 msgfParModificationList <- function(nMod, modifications=list()){
 	if(length(modifications) == 0){

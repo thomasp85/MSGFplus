@@ -7,23 +7,26 @@ Maintainer: Thomas Dybdal Pedersen <thomasp85@gmail.com>
 Description: This package contains function to perform peptide identification
     using MS-GF+
 License: GPL (>= 2)
+VignetteBuilder: knitr
 SystemRequirements: Java (>= 1.7)
 LazyLoad: yes
 Depends:
     methods
 Imports:
-    mzID,
-    XML
+    mzID
 Suggests:
-    gWidgets
+    gWidgets,
+    knitr
 Collate:
     'MSGFplus-package.R'
     'aaa.R'
     'generics.R'
+    'msgfAsync.R'
     'msgfParTolerance.R'
     'msgfParTda.R'
     'msgfParProtocol.R'
     'msgfParNtt.R'
+    'msgfParModification.R'
     'msgfParModificationList.R'
     'msgfParMatches.R'
     'msgfParLengthRange.R'
@@ -33,6 +36,6 @@ Collate:
     'msgfParEnzyme.R'
     'msgfParChargeRange.R'
     'msgfPar.R'
+    'msgfPar-getters.R'
     'msgfParGUI.R'
-    'msgfParModification.R'
     'zzz.R'
