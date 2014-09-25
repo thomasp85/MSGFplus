@@ -1,7 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
-.DS_Store
+*.DS_Store
 .Rbuildignore
 .project
 .settings/
