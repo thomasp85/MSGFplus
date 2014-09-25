@@ -13,22 +13,22 @@ createFileCall <- function(rawfile, savename){
         rawfile <- paste0('\"', rawfile, '\"')
         savename <- paste0('\"', savename, '\"')
     } else {
-        rawfile <- gsub(' ', '\\ ', rawfile, fixed=T)
-        savename <- gsub(' ', '\\ ', savename, fixed=T)
+        rawfile <- gsub(' ', '\\ ', rawfile, fixed=TRUE)
+        savename <- gsub(' ', '\\ ', savename, fixed=TRUE)
     }
     paste0('-s ', rawfile, ' -o ', savename)
 }
 
-#' Print the MS-GF+ license
+#' Download the MS-GF+ jar file
 #' 
-#' This function pipes the content of the MS-GF+ LICENCE file into the stdin of R
+#' This function downloads and extracts MS-GF+ into the package directory
 #' 
 #' @noRd
 #' 
-printMSGFLicense <- function() {
-    license <- system.file(package='MSGFplus', 'MSGFPlus', 'LICENSE.txt')
-    if(license != '') {
-        cat('                 -=<( MS-GF+ License )>=-\n\n')
-        writeLines(readLines(license))
-    }
+getMSGFplus <- function() {
+    zipFile <- tempfile()
+    msgfLocation <- file.path(system.file(package='MSGFplus'), 'MSGFPlus')
+    dir.create(msgfLocation)
+    download.file('http://proteomics.ucsd.edu/Software/MSGFPlus/MSGFPlus.20140630.zip', destfile = zipFile)
+    unzip(zipfile = zipFile, exdir = msgfLocation)
 }
