@@ -23,10 +23,23 @@ NULL
 #' 
 #' @slot resultFile Returns the location of the result file from the MS-GF+ 
 #' analysis. WARNING: Checking for the existence of this file is not a safe way 
-#' to determine the status of the process, as the file gets writte to 
+#' to determine the status of the process, as the file gets written to 
 #' continuously.
 #' 
-#' @docType class
+#' @examples
+#' \dontrun{
+#' parameters <- msgfPar(
+#'                       database=system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'),
+#'                       tolerance='20 ppm',
+#'                       instrument='TOF',
+#'                       enzyme='Lys-C'
+#'                      )
+#' asyncMSGF <- runMSGF(parameters, 'file1.mzML', async=TRUE)
+#' while(!running(asyncMSGF)){
+#'     Sys.sleep(1)
+#' }
+#' results <- import(asyncMSGF)
+#' }
 #' 
 setClass(
     Class='msgfAsync',

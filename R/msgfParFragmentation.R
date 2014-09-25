@@ -1,9 +1,16 @@
-# TODO: Add comment
-# 
-# Author: Thomas
-###############################################################################
-
-
+#' A class handling Fragmentation types
+#' 
+#' This class defines a fragmentation type and provides methods to get correct system
+#' call parameters.
+#' 
+#' @slot method An integer between 0 and 4 giving the selected method
+#' 
+#' @examples
+#' fragmentation <- msgfParFragmentation(1)
+#' fragmentation <- msgfParFragmentation('CID')
+#' 
+#' @family msgfParClasses
+#' 
 setClass(
 		Class='msgfParFragmentation',
 		representation=representation(
@@ -13,7 +20,7 @@ setClass(
 			if((object@method %in% fragmentationLookup()$Index | is.na(object@method)) & length(object@method) == 1){
 				return(TRUE)
 			} else {
-				stop('Unknown fragmentation method')
+				return('Unknown fragmentation method')
 			}
 		},
 		prototype=prototype(
@@ -23,6 +30,10 @@ setClass(
 fragmentationLookup <- function(){
 	data.frame(Index=0:4, Description=c('As written in the spectrum or CID if no info', 'CID', 'ETD', 'HCD', 'Merge spectra from the same precursor'))
 }
+#' @describeIn msgfParFragmentation Short summary of msgfParFragmentation object
+#' 
+#' @param object An msgfParFragmentation object
+#' 
 setMethod(
 		'show', 'msgfParFragmentation',
 		function(object){
@@ -34,6 +45,12 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParFragmentation Report the length of an msgfParFragmentation object
+#' 
+#' @param x An msgfParFragmentation object
+#' 
+#' @return For length() An integer.
+#' 
 setMethod(
 		'length', 'msgfParFragmentation',
 		function(x){
@@ -44,6 +61,10 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParFragmentation Get \code{\link[base]{system}} compliant function call
+#' 
+#' @return For getMSGFpar() A string.
+#' 
 setMethod(
 		'getMSGFpar', 'msgfParFragmentation',
 		function(object){
@@ -54,6 +75,14 @@ setMethod(
 			}
 		}
 )
+#' @rdname msgfParFragmentation-class
+#' 
+#' @param method An integer specifying the method
+#' 
+#' @return For msgfParFragmentation() An msgfParFragmentation object.
+#' 
+#' @export
+#' 
 msgfParFragmentation <- function(method){
 	if(missing(method)){
 		new(Class='msgfParFragmentation')

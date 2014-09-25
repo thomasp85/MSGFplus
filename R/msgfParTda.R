@@ -1,9 +1,15 @@
-# TODO: Add comment
-# 
-# Author: Thomas
-###############################################################################
-
-
+#' A class handling use of target-decoy approach for FDR estimation
+#' 
+#' This class defines whether to use target-decoy approach and provides methods 
+#' to get correct system call parameters.
+#' 
+#' @slot tda A boolean defining whether to use tda or not
+#' 
+#' @examples
+#' tda <- msgfParTda(TRUE)
+#' 
+#' @family msgfParClasses
+#' 
 setClass(
 		Class='msgfParTda',
 		representation=representation(
@@ -13,13 +19,17 @@ setClass(
 			if(length(object@tda) == 1){
 				return(TRUE)
 			} else {
-				stop('tda can only be of length 1')
+				return('tda can only be of length 1')
 			}
 		},
 		prototype=prototype(
 				tda=as.logical(NA)
 		)
 )
+#' @describeIn msgfParTda Short summary of msgfParTda object
+#' 
+#' @param object An msgfParTda object
+#' 
 setMethod(
 		'show', 'msgfParTda',
 		function(object){
@@ -30,6 +40,12 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParTda Report the length of an msgfParTda object
+#' 
+#' @param x An msgfParTda object
+#' 
+#' @return For length() An integer.
+#' 
 setMethod(
 		'length', 'msgfParTda',
 		function(x){
@@ -40,6 +56,10 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParTda Get \code{\link[base]{system}} compliant function call
+#' 
+#' @return For getMSGFpar() A string.
+#' 
 setMethod(
 		'getMSGFpar', 'msgfParTda',
 		function(object){
@@ -52,6 +72,14 @@ setMethod(
 			}
 		}
 )
+#' @rdname msgfParTda-class
+#' 
+#' @param value A boolean defining whether to use tda or not
+#' 
+#' @return For msgfParTda() An msgfParTda object.
+#' 
+#' @export
+#' 
 msgfParTda <- function(value){
 	if(missing(value)){
 		new(Class='msgfParTda')

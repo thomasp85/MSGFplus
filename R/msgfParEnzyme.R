@@ -3,14 +3,12 @@
 #' This class defines a digestion enzyme selection and provides methods to get correct system
 #' call parameters.
 #' 
-#' @name msgfParEnzyme
+#' @slot enzyme An integer specifiying the selection of enzyme. See the detail section of \code{\link{msgfPar}}
 #' 
-#' @section Slots:
-#' \describe{
-#'  \item{\code{enzyme}:}{An integer specifiying the selection of enzyme. See the detail section of \code{\link{msgfPar}}}
-#' }
+#' @examples
+#' enzyme <- msgfParEnzyme(1)
+#' enzyme <- msgfParEnzyme('Trypsin')
 #' 
-#' @rdname msgfParEnzyme
 #' @family msgfParClasses
 #' 
 setClass(
@@ -22,7 +20,7 @@ setClass(
 			if(object@enzyme %in% enzymeLookup()$Index & length(object@enzyme) == 1){
 				return(TRUE)
 			} else {
-				stop('Unknown enzyme')
+				return('Unknown enzyme')
 			}
 		},
 		prototype=prototype(
@@ -32,6 +30,10 @@ setClass(
 enzymeLookup <- function(){
 	data.frame(Index=0:9, Description=c('unspecific cleavage', 'Trypsin', 'Chymotrypsin', 'Lys-C', 'Lys-N', 'glutamyl endopeptidase (Glu-C)', 'Arg-C', 'Asp-N', 'alphaLP', 'no cleavage'))
 }
+#' @describeIn msgfParEnzyme Short summary of msgfParEnzyme object
+#' 
+#' @param object An msgfParEnzyme object
+#' 
 setMethod(
 		'show', 'msgfParEnzyme',
 		function(object){
@@ -43,6 +45,12 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParEnzyme Report the length of an msgfParEnzyme object
+#' 
+#' @param x An msgfParEnzyme object
+#' 
+#' @return For length() An integer.
+#' 
 setMethod(
 		'length', 'msgfParEnzyme',
 		function(x){
@@ -53,6 +61,10 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParEnzyme Get \code{\link[base]{system}} compliant function call
+#' 
+#' @return For getMSGFpar() A string.
+#' 
 setMethod(
 		'getMSGFpar', 'msgfParEnzyme',
 		function(object){
@@ -63,6 +75,14 @@ setMethod(
 			}
 		}
 )
+#' @rdname msgfParEnzyme-class
+#' 
+#' @param enzyme Either an integer or a string
+#' 
+#' @return For msgfParEnzyme() An msgfParEnzyme object.
+#' 
+#' @export
+#' 
 msgfParEnzyme <- function(enzyme){
 	if(missing(enzyme)){
 		new(Class='msgfParEnzyme')
@@ -74,7 +94,7 @@ msgfParEnzyme <- function(enzyme){
 			if(tolower(enzyme) %in% tolower(enzymeLookup()$Description)){
 				enzyme <- enzymeLookup()$Index[tolower(enzymeLookup()$Description) == tolower(enzyme)]
 				new(Class='msgfParEnzyme', enzyme=enzyme)
-			} else stop('Unknown Enzyme')
+			} else stop('Unknown enzyme')
 		} else stop('enzyme must be either numeric or string')
 	}
 }

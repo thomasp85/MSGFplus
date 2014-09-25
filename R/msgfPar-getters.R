@@ -15,27 +15,25 @@
 #' @include msgfParTolerance.R
 NULL
 
-#' @rdname msgfPar_get_set-methods
+#' @describeIn db Get the database location
 #' 
 setMethod(
-    'database', 'msgfPar',
+    'db', 'msgfPar',
     function(object){
         object@database
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn db Set the database location
 #' 
-#' @name database<-
-#' 
-setReplaceMethod(
-    'database', 'msgfPar',
+setMethod(
+    'db<-', c('msgfPar', 'character'),
     function(object, value){
         object@database <- value
         validObject(object)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn chargeRange Get the charge range
 #' 
 setMethod(
     'chargeRange', 'msgfPar',
@@ -45,29 +43,26 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn chargeRange Set the charge range using lower and upper bounds
 #' 
-#' @name chargeRange<-
-#' 
-setReplaceMethod(
-    'chargeRange', c('msgfPar', 'numeric'),
+setMethod(
+    'chargeRange<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@chargeRange <- msgfParChargeRange(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn chargeRange Set the charge range using a dedicated
+#' msgfParChargeRange object
 #' 
-#' @name chargeRange<-
-#' 
-setReplaceMethod(
-    'chargeRange', c('msgfPar', 'msgfParChargeRange'),
+setMethod(
+    'chargeRange<-', c('msgfPar', 'msgfParChargeRange'),
     function(object, value) {
         object@chargeRange <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn enzyme Get the enzyme currently used
 #' 
 setMethod(
     'enzyme', 'msgfPar',
@@ -77,40 +72,34 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn enzyme Set the enzyme to use using the key for the enzyme
 #' 
-#' @name enzyme<-
-#' 
-setReplaceMethod(
-    'enzyme', c('msgfPar', 'numeric'),
+setMethod(
+    'enzyme<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@enzyme <- msgfParEnzyme(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn enzyme Set the enzyme to use using the name of the enzyme
 #' 
-#' @name enzyme<-
-#' 
-setReplaceMethod(
-    'enzyme', c('msgfPar', 'character'),
+setMethod(
+    'enzyme<-', c('msgfPar', 'character'),
     function(object, value) {
         object@enzyme <- msgfParEnzyme(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn enzyme Set the enzyme to use using an msgfParEnzyme object
 #' 
-#' @name enzyme<-
-#' 
-setReplaceMethod(
-    'enzyme', c('msgfPar', 'msgfParEnzyme'),
+setMethod(
+    'enzyme<-', c('msgfPar', 'msgfParEnzyme'),
     function(object, value) {
         object@enzyme <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn fragmentation Get the fragmentation method currently used
 #' 
 setMethod(
     'fragmentation', 'msgfPar',
@@ -120,40 +109,37 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn fragmentation Set the fragmentation method using the key for the 
+#' method
 #' 
-#' @name fragmentation<-
-#' 
-setReplaceMethod(
-    'fragmentation', c('msgfPar', 'numeric'),
+setMethod(
+    'fragmentation<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@fragmentation <- msgfParFragmentation(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn fragmentation Set the fragmentation method using the name of the 
+#' method
 #' 
-#' @name fragmentation<-
-#' 
-setReplaceMethod(
-    'fragmentation', c('msgfPar', 'character'),
+setMethod(
+    'fragmentation<-', c('msgfPar', 'character'),
     function(object, value) {
         object@fragmentation <- msgfParFragmentation(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn fragmentation Set the fragmentation method using an 
+#' msgfParFragmentation object
 #' 
-#' @name fragmentation<-
-#' 
-setReplaceMethod(
-    'fragmentation', c('msgfPar', 'msgfParFragmentation'),
+setMethod(
+    'fragmentation<-', c('msgfPar', 'msgfParFragmentation'),
     function(object, value) {
         object@fragmentation <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn instrument Get the instrument currently used
 #' 
 setMethod(
     'instrument', 'msgfPar',
@@ -163,40 +149,34 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn instrument Set the instrument using the key for the instrument
 #' 
-#' @name instrument<-
-#' 
-setReplaceMethod(
-    'instrument', c('msgfPar', 'numeric'),
+setMethod(
+    'instrument<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@instrument <- msgfParInstrument(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn instrument Set the instrument using the name of the instrument
 #' 
-#' @name instrument<-
-#' 
-setReplaceMethod(
-    'instrument', c('msgfPar', 'character'),
+setMethod(
+    'instrument<-', c('msgfPar', 'character'),
     function(object, value) {
         object@instrument <- msgfParInstrument(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn instrument Set the instrument using an msgfParInstrument object
 #' 
-#' @name instrument<-
-#' 
-setReplaceMethod(
-    'instrument', c('msgfPar', 'msgfParInstrument'),
+setMethod(
+    'instrument<-', c('msgfPar', 'msgfParInstrument'),
     function(object, value) {
         object@instrument <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn isotopeError Get the isotope error currently used
 #' 
 setMethod(
     'isotopeError', 'msgfPar',
@@ -204,29 +184,26 @@ setMethod(
         object@isotopeError@range
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn isotopeError Set the isotope error with an integer vector
 #' 
-#' @name isotopeError<-
-#' 
-setReplaceMethod(
-    'isotopeError', c('msgfPar', 'numeric'),
+setMethod(
+    'isotopeError<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@isotopeError <- msgfParIsotopeError(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn isotopeError Set the isotope error with an msgfParIsotopeError 
+#' object
 #' 
-#' @name isotopeError<-
-#' 
-setReplaceMethod(
-    'isotopeError', c('msgfPar', 'msgfParIsotopeError'),
+setMethod(
+    'isotopeError<-', c('msgfPar', 'msgfParIsotopeError'),
     function(object, value) {
         object@isotopeError <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn lengthRange Get the lower and upper bounds of peptide lengths
 #' 
 setMethod(
     'lengthRange', 'msgfPar',
@@ -236,29 +213,27 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn lengthRange Set the lower and upper bounds of peptide lengths 
+#' using an integer vector
 #' 
-#' @name lengthRange<-
-#' 
-setReplaceMethod(
-    'lengthRange', c('msgfPar', 'numeric'),
+setMethod(
+    'lengthRange<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@lengthRange <- msgfParLengthRange(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn lengthRange Set the lower and upper bounds of peptide lengths 
+#' using an msgfParLengthRange
 #' 
-#' @name lengthRange<-
-#' 
-setReplaceMethod(
-    'lengthRange', c('msgfPar', 'msgfParLengthRange'),
+setMethod(
+    'lengthRange<-', c('msgfPar', 'msgfParLengthRange'),
     function(object, value) {
         object@lengthRange <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn matches Get the number of matches reported per spectrum
 #' 
 setMethod(
     'matches', 'msgfPar',
@@ -267,29 +242,27 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn matches Set the number of matches reported per spectrum using an
+#' integer
 #' 
-#' @name matches<-
-#' 
-setReplaceMethod(
-    'matches', c('msgfPar', 'numeric'),
+setMethod(
+    'matches<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@matches <- msgfParMatches(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn matches Set the number of matches reported per spectrum using an
+#' msgfParMatches object
 #' 
-#' @name matches<-
-#' 
-setReplaceMethod(
-    'matches', c('msgfPar', 'msgfParMatches'),
+setMethod(
+    'matches<-', c('msgfPar', 'msgfParMatches'),
     function(object, value) {
         object@matches <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn ntt Get the number of tolerable termini
 #' 
 setMethod(
     'ntt', 'msgfPar',
@@ -298,29 +271,25 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn ntt Set the ntt using an integer
 #' 
-#' @name ntt<-
-#' 
-setReplaceMethod(
-    'ntt', c('msgfPar', 'numeric'),
+setMethod(
+    'ntt<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@ntt <- msgfParNtt(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn ntt Set the ntt using an msgfParNtt object
 #' 
-#' @name ntt<-
-#' 
-setReplaceMethod(
-    'ntt', c('msgfPar', 'msgfParNtt'),
+setMethod(
+    'ntt<-', c('msgfPar', 'msgfParNtt'),
     function(object, value) {
         object@ntt <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn protocol Get the protocol currently used
 #' 
 setMethod(
     'protocol', 'msgfPar',
@@ -330,40 +299,34 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn protocol Set the protocol using the key for the protocol
 #' 
-#' @name protocol<-
-#' 
-setReplaceMethod(
-    'protocol', c('msgfPar', 'numeric'),
+setMethod(
+    'protocol<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@protocol <- msgfParProtocol(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn protocol Set the protocol using the name of the protocol
 #' 
-#' @name protocol<-
-#' 
-setReplaceMethod(
-    'protocol', c('msgfPar', 'character'),
+setMethod(
+    'protocol<-', c('msgfPar', 'character'),
     function(object, value) {
         object@protocol <- msgfParProtocol(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn protocol Set the protocol using an msgfParProtocol object
 #' 
-#' @name protocol<-
-#' 
-setReplaceMethod(
-    'protocol', c('msgfPar', 'msgfParProtocol'),
+setMethod(
+    'protocol<-', c('msgfPar', 'msgfParProtocol'),
     function(object, value) {
         object@protocol <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tda Get whether tda is currently used for FDR estimation
 #' 
 setMethod(
     'tda', 'msgfPar',
@@ -372,29 +335,25 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tda Set the use of tda using a boolean (TRUE/FALSE)
 #' 
-#' @name tda<-
-#' 
-setReplaceMethod(
-    'tda', c('msgfPar', 'logical'),
+setMethod(
+    'tda<-', c('msgfPar', 'logical'),
     function(object, value) {
         object@tda <- msgfParTda(value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tda Set the use of tda using an msgfParTda object
 #' 
-#' @name tda<-
-#' 
-setReplaceMethod(
-    'tda', c('msgfPar', 'msgfParTda'),
+setMethod(
+    'tda<-', c('msgfPar', 'msgfParTda'),
     function(object, value) {
         object@tda <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tolerance Get the lower and upper bounds of the tolerance
 #' 
 setMethod(
     'tolerance', 'msgfPar',
@@ -403,7 +362,7 @@ setMethod(
         paste(res, object@tolerance@unit)
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tolerance Get the lower and upper bounds of the tolerance
 #' 
 setMethod(
     'toleranceRange', 'msgfPar',
@@ -412,7 +371,7 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tolerance Get the unit the tolerance is measured in
 #' 
 setMethod(
     'toleranceUnit', 'msgfPar',
@@ -421,12 +380,11 @@ setMethod(
         res
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tolerance Set the lower and upper bounds of the tolerance using a
+#' numeric vector of length 2
 #' 
-#' @name toleranceRange<-
-#' 
-setReplaceMethod(
-    'toleranceRange', c('msgfPar', 'numeric'),
+setMethod(
+    'toleranceRange<-', c('msgfPar', 'numeric'),
     function(object, value) {
         if(length(value) == 1) {
             object@tolerance <- msgfParTolerance(value, unit=toleranceUnit(object))
@@ -436,24 +394,22 @@ setReplaceMethod(
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tolerance Set the unit the tolerance is meassured in
 #' 
-#' @name toleranceUnit<-
-#' 
-setReplaceMethod(
-    'toleranceUnit', c('msgfPar', 'character'),
+setMethod(
+    'toleranceUnit<-', c('msgfPar', 'character'),
     function(object, value) {
         range = toleranceRange(object)
         object@tolerance <- msgfParTolerance(low=range[1], high=range[2], unit=value)
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tolerance Set the lower and upper bounds of the tolerance using a
+#' character vector of length 2, where each element is of the form '<value> 
+#' <unit>'
 #' 
-#' @name tolerance<-
-#' 
-setReplaceMethod(
-    'tolerance', c('msgfPar', 'character'),
+setMethod(
+    'tolerance<-', c('msgfPar', 'character'),
     function(object, value) {
         value <- strsplit(value, ' ')
         if(length(value) == 1) {
@@ -464,37 +420,37 @@ setReplaceMethod(
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn tolerance Set the lower and upper bounds of the tolerance using 
+#' an msgfParTolerance object
 #' 
-#' @name tolerance<-
-#' 
-setReplaceMethod(
-    'tolerance', c('msgfPar', 'msgfParTolerance'),
+setMethod(
+    'tolerance<-', c('msgfPar', 'msgfParTolerance'),
     function(object, value) {
         object@tolerance <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn mods Get the list of modifications allowed during 
+#' peptide search
 #' 
 setMethod(
-    'modifications', 'msgfPar',
+    'mods', 'msgfPar',
     function(object){
         object@modification
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn mods Set the list of modifications allowed during 
+#' peptide search
 #' 
-#' @name modifications<-
-#' 
-setReplaceMethod(
-    'modifications', c('msgfPar', 'msgfParModificationList'),
+setMethod(
+    'mods<-', c('msgfPar', 'msgfParModificationList'),
     function(object, value) {
         object@modification <- value
         object
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn mods Get the number of peptides allowed per peptide 
+#' during search
 #' 
 setMethod(
     'nMod', 'msgfPar',
@@ -502,12 +458,11 @@ setMethod(
         object@modification@nMod
     }
 )
-#' @rdname msgfPar_get_set-methods
+#' @describeIn mods Set the number of peptides allowed per peptide 
+#' during search using an integer
 #' 
-#' @name nMod<-
-#' 
-setReplaceMethod(
-    'nMod', c('msgfPar', 'numeric'),
+setMethod(
+    'nMod<-', c('msgfPar', 'numeric'),
     function(object, value) {
         object@modification@nMod <- value
         object

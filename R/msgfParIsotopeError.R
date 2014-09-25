@@ -1,9 +1,15 @@
-# TODO: Add comment
-# 
-# Author: Thomas
-###############################################################################
-
-
+#' A class handling isotope errors
+#' 
+#' This class defines a set of isotopes that should be included for error 
+#' correction and provides methods to get correct system call parameters.
+#' 
+#' @slot range An integer vector with isotopes to error correct
+#' 
+#' @examples
+#' isotopeError <- msgfParIsotopeError(0:2)
+#' 
+#' @family msgfParClasses
+#' 
 setClass(
 		Class='msgfParIsotopeError',
 		representation=representation(
@@ -13,13 +19,17 @@ setClass(
 			if(all(floor(object@range) == object@range)){
 				return(TRUE)
 			} else {
-				stop('range must consist of integers')
+				return('range must consist of integers')
 			}
 		},
 		prototype=prototype(
 				range=as.numeric(NA)
 		)
 )
+#' @describeIn msgfParIsotopeError Short summary of msgfParIsotopeError object
+#' 
+#' @param object An msgfParIsotopeError object
+#' 
 setMethod(
 		'show', 'msgfParIsotopeError',
 		function(object){
@@ -30,6 +40,12 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParIsotopeError Report the length of an msgfParIsotopeError object
+#' 
+#' @param x An msgfParIsotopeError object
+#' 
+#' @return For length() An integer.
+#' 
 setMethod(
 		'length', 'msgfParIsotopeError',
 		function(x){
@@ -40,6 +56,10 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParIsotopeError Get \code{\link[base]{system}} compliant function call
+#' 
+#' @return For getMSGFpar() A string.
+#' 
 setMethod(
 		'getMSGFpar', 'msgfParIsotopeError',
 		function(object){
@@ -50,6 +70,14 @@ setMethod(
 			}
 		}
 )
+#' @rdname msgfParIsotopeError-class
+#' 
+#' @param range An integer vector with isotopes
+#' 
+#' @return For msgfParIsotopeError() An msgfParIsotopeError object.
+#' 
+#' @export
+#' 
 msgfParIsotopeError <- function(range){
 	if(missing(range)){
 		new(Class='msgfParIsotopeError')

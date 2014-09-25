@@ -3,10 +3,10 @@
 #' This class defines a charge range and provides methods to get correct system
 #' call parameters.
 #' 
-#' @section Slots:
-#' \describe{
-#'  \item{\code{value}:}{A numeric vector of length 2 describing the upper and lower bounds of the charge range}
-#' }
+#' @slot value A numeric vector of length 2 describing the upper and lower bounds of the charge range
+#' 
+#' @examples
+#' charges <- msgfParChargeRange(c(2, 5))
 #' 
 #' @family msgfParClasses
 #' 
@@ -17,11 +17,13 @@ setClass(
 		),
 		validity=function(object){
 			if(length(object) != 0){
-				if((length(object@value) == 2 & object@value[1] <= object@value[2])){
-					return(TRUE)
-				} else {
-					stop('value must be of length 2')
-				}				
+			    if(length(object@value) != 2){
+			        return('value must be of length 2')
+			    } else if(object@value[1] >= object@value[2]){
+			        return('lower bound must be less than upper bound')
+			    } else {
+			        return(TRUE)
+			    }				
 			} else {
 				return(TRUE)
 			}
@@ -30,6 +32,10 @@ setClass(
 				value=as.numeric(NA)
 		)
 )
+#' @describeIn msgfParChargeRange Short summary of msgfParChargeRange object
+#' 
+#' @param object An msgfParChargeRange object
+#' 
 setMethod(
 		'show', 'msgfParChargeRange',
 		function(object){
@@ -40,6 +46,12 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParChargeRange Report the length of an msgfParChargeRange object
+#' 
+#' @param x An msgfParChargeRange object
+#' 
+#' @return For length() An integer.
+#' 
 setMethod(
 		'length', 'msgfParChargeRange',
 		function(x){
@@ -50,9 +62,9 @@ setMethod(
 			}
 		}
 )
-#' see getMSGFpar-methods
+#' @describeIn msgfParChargeRange Get \code{\link[base]{system}} compliant function call
 #' 
-#' @noRd
+#' @return For getMSGFpar() A string.
 #' 
 setMethod(
 		'getMSGFpar', 'msgfParChargeRange',
@@ -64,12 +76,11 @@ setMethod(
 			}
 		}
 )
-
 #' @rdname msgfParChargeRange-class
 #' 
 #' @param value A numeric vector of length 2. The first element must be smaller than the last
 #' 
-#' @return An msgfParChargeRange object
+#' @return For msgfParChargeRange() An msgfParChargeRange object.
 #' 
 #' @export
 #' 

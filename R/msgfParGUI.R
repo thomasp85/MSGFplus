@@ -12,6 +12,11 @@
 #' 
 #' @return A msgfPar object with parameters set according to the final state of the GUI
 #' 
+#' @examples
+#' \dontrun{
+#' parameters <- msgfParGUI()
+#' }
+#' 
 #' @seealso \code{\link{msgfPar-class}}
 #' 
 #' @export

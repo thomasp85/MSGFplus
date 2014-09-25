@@ -1,25 +1,38 @@
-# TODO: Add comment
-# 
-# Author: Thomas
-###############################################################################
-
-
+#' A class handling cleavage specificity
+#' 
+#' This class defines cleavage specificity and provides methods to get correct system
+#' call parameters.
+#' 
+#' @slot value An integer between 0 and 2 that specifies the specificity (2: 
+#' full cleavage, 1: semi specific cleavage, 0: no specificity)
+#' 
+#' @examples
+#' ntt <- msgfParNtt(2)
+#' 
+#' @family msgfParClasses
+#' 
 setClass(
 		Class='msgfParNtt',
 		representation=representation(
 				value='numeric'
 		),
 		validity=function(object){
-			if(length(object@value) == 1 & object@value %in% 0:2){
-				return(TRUE)
+			if(length(object@value) != 1){
+			    return('value can only be of length 1')
+			} else if(!object@value %in% 0:2){
+				return('value must be between 0 and 2')
 			} else {
-				stop('value can only be of length 1 and between 0 and 2')
+                return(TRUE)
 			}
 		},
 		prototype=prototype(
 				value=as.numeric(NA)
 		)
 )
+#' @describeIn msgfParNtt Short summary of msgfParNtt object
+#' 
+#' @param object An msgfParNtt object
+#' 
 setMethod(
 		'show', 'msgfParNtt',
 		function(object){
@@ -30,6 +43,12 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParNtt Report the length of an msgfParNtt object
+#' 
+#' @param x An msgfParNtt object
+#' 
+#' @return For length() An integer.
+#' 
 setMethod(
 		'length', 'msgfParNtt',
 		function(x){
@@ -40,6 +59,10 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParNtt Get \code{\link[base]{system}} compliant function call
+#' 
+#' @return For getMSGFpar() A string.
+#' 
 setMethod(
 		'getMSGFpar', 'msgfParNtt',
 		function(object){
@@ -50,6 +73,15 @@ setMethod(
 			}
 		}
 )
+#' @rdname msgfParNtt-class
+#' 
+#' @param value An integer between 0 and 2 that specifies the specificity (2: 
+#' full cleavage, 1: semi specific cleavage, 0: no specificity)
+#' 
+#' @return For msgfParNtt() An msgfParNtt object.
+#' 
+#' @export
+#' 
 msgfParNtt <- function(value){
 	if(missing(value)){
 		new(Class='msgfParNtt')

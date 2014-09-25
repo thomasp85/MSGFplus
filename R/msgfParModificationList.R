@@ -1,6 +1,45 @@
 #' @include msgfParModification.R
 NULL
 
+#' A class handling a list of modifications
+#' 
+#' This class defines a set of modifications and a maximum number of 
+#' modifications allowed per peptide.
+#' 
+#' @slot nMod The maximum allowed number of modifications to expect on any peptide
+#' @slot modifications A list of \code{\linkS4class{msgfParModification}} objects
+#' 
+#' @examples
+#' modification1 <- msgfParModification(
+#'                                      name='Carbamidomethyl',
+#'                                      composition='C2H3N1O1',
+#'                                      residues='C',
+#'                                      type='fix',
+#'                                      position='any'
+#'                                     )
+#' modification2 <- msgfParModification(
+#'                                      name='Oxidation',
+#'                                      mass=15.994915,
+#'                                      residues='M',
+#'                                      type='opt',
+#'                                      position='any'
+#'                                     )
+#' modificationlist <- msgfParModificationList(
+#'                                             nMod=2,
+#'                                             modifications=list(
+#'                                                 modification1,
+#'                                                 modification2
+#'                                             )
+#'                                            )
+#' modificationlist[[3]] <- msgfParModification(
+#'                                              name='Gln->pyro-Glu',
+#'                                              composition='H-3N-1',
+#'                                              residues='Q',
+#'                                              type='opt',
+#'                                              position='N-term'
+#'                                             )
+#' @family msgfParClasses
+#' 
 setClass(
 		'msgfParModificationList',
 		representation=representation(
@@ -9,12 +48,12 @@ setClass(
 		),
 		validity=function(object){
 			if(length(object@nMod) != 1){
-				stop('nMod must be of length 1')
+				return('nMod must be of length 1')
 			} else if(object@nMod != floor(object@nMod)){
-				stop('nMod must be an integer')
+				return('nMod must be an integer')
 			} else if(length(object@modifications) != 0){
 				if(!all(sapply(object@modifications, class) == 'msgfParModification')){
-					stop('Modifications should be supplied as a list of modification objects')
+					return('Modifications should be supplied as a list of modification objects')
 				} else {}
 			} else {
 				return(TRUE)
@@ -25,6 +64,10 @@ setClass(
 				modifications=list()
 		)
 )
+#' @describeIn msgfParModificationList Short summary of msgfParModificationList object
+#' 
+#' @param object An msgfParModificationList object
+#' 
 setMethod(
 		'show', 'msgfParModificationList',
 		function(object){
@@ -38,12 +81,22 @@ setMethod(
 			}
 		}
 )
+#' @describeIn msgfParModificationList Report the length of an msgfParModificationList object
+#' 
+#' @param x An msgfParModificationList object
+#' 
+#' @return For length() An integer.
+#' 
 setMethod(
 		'length', 'msgfParModificationList',
 		function(x){
 			length(x@modifications)
 		}
 )
+#' @describeIn msgfParModificationList Get \code{\link[base]{system}} compliant function call
+#' 
+#' @return For getMSGFpar() A string.
+#' 
 setMethod(
 		'getMSGFpar', 'msgfParModificationList',
 		function(object){
@@ -59,28 +112,54 @@ setMethod(
 					cat('\n')
 				}
 				sink()
-				paste('-mod ', modFile)
+				paste('-mod', modFile)
 			} else {
 				''
 			}			
 		}
 )
+#' @describeIn msgfParModificationList Get the i'th modification
+#' 
+#' @param i The index of the modification
+#' 
+#' @param j Ignored
+#' 
+#' @param ... Ignored
+#' 
+#' @return For '[[' A msgfParModification object
+#' 
 setMethod(
     '[[', c('msgfParModificationList', 'numeric', 'missing'),
     function(x, i, j, ...) {
         x@modifications[[i]]
     }
 )
-setReplaceMethod(
-    '[[', c('msgfParModificationList', 'numeric', 'missing', 'msgfParModification'),
+#' @describeIn msgfParModificationList Set or change the i'th modification
+#' 
+#' @param value An msgfParModification object
+#' 
+setMethod(
+    '[[<-', c('msgfParModificationList', 'numeric', 'missing', 'msgfParModification'),
     function(x, i, j, ..., value) {
         x@modifications[[i]] <- value
         x
     }
 )
+#' @rdname msgfParModificationList-class
+#' 
+#' @param nMod The maximum allowed number of modifications to expect on any peptide
+#' 
+#' @param modifications A list of \code{\linkS4class{msgfParModification}} objects
+#' 
+#' @return For msgfParModificationList() An msgfParModificationList object.
+#' 
+#' @export
+#' 
 msgfParModificationList <- function(nMod, modifications=list()){
 	if(length(modifications) == 0){
-		new(Class='msgfParModificationList')
+		mods <- new(Class='msgfParModificationList')
+        if(!missing(nMod)) nMod(mods) <- nMod
+        mods
 	} else {
 		modifications <- lapply(modifications, function(x){
 					if(class(x) != 'msgfParModification'){
