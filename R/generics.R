@@ -9,9 +9,16 @@
 #' 
 #' @seealso \code{\link{msgfPar-class}}
 #' 
+#' @examples
+#' parameters <- msgfPar(
+#'                       database=system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'),
+#'                       tolerance='20 ppm',
+#'                       instrument='TOF',
+#'                       enzyme='Lys-C'
+#'                      )
+#' getMSGFpar(parameters)
+#' 
 #' @export
-#' @docType methods
-#' @rdname getMSGFpar-methods
 #' 
 setGeneric(
 		'getMSGFpar',
@@ -41,11 +48,20 @@ setGeneric(
 #' @param msgfPath The path to an alternative MSGFPlus.jar file if the bundled one is not desired
 #' 
 #' @return If import=TRUE a list of mzID object otherwise NULL
-#'  
+#' 
+#' @examples
+#' \dontrun{
+#' parameters <- msgfPar(
+#'                       database=system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'),
+#'                       tolerance='20 ppm',
+#'                       instrument='TOF',
+#'                       enzyme='Lys-C'
+#'                      )
+#' runMSGF(parameters, c('file1.mzML', 'file2.mzML'))
+#' }
+#' 
 #' @export
 #' 
-#' @docType methods
-#' @rdname runMSGF-methods
 #' @seealso \code{\link[mzID]{mzID}}
 #' 
 setGeneric(
@@ -53,8 +69,6 @@ setGeneric(
   def=function(object, rawfiles, savenames, import, memory, async, msgfPath){standardGeneric('runMSGF')}
 )
 
-#' Generic for msgfAsync - Documented with class
-#' 
 #' @export
 #' 
 #' @rdname msgfAsync-class
@@ -82,287 +96,505 @@ setGeneric(
 
 
 
-#' Get and set the location of the database file as specified in the msgfPar object
+#' Get and set database in msgfPar objects
 #' 
-#' This function extracts or replaces the string holding the database location
-#' in the msgfPar object
+#' These functions allow you to retrieve and set the location of the database 
+#' fasta file in the msgfPar object of interest
 #' 
 #' @param object An msgfPar object
 #' 
-#' @return Depending on the method. See details
+#' @return In case of the getter a character vector with the location of the 
+#' database file
 #' 
-#' @seealso \code{\link{msgfPar-class}}
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' db(parameters) <- system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta')
+#' db(parameters)
 #' 
 #' @export
-#' @docType methods
-#' @rdname msgfPar_get_set-methods
-#' @aliases database
-#' @name msgfPar getters amd setters
 #' 
 setGeneric(
-    'database',
-    def=function(object){standardGeneric('database')}
+    'db',
+    def=function(object){standardGeneric('db')}
 )
 
-#' @param value Depending on the method. See details
+#' @rdname db
+#' 
+#' @param value A string matching the location of a fasta file
 #' 
 #' @export
-#' @rdname msgfPar_get_set-methods
 #' 
 setGeneric(
-    'database<-',
-    def=function(object, value){standardGeneric('database<-')}
+    'db<-',
+    def=function(object, value){standardGeneric('db<-')}
 )
 
-#' @export
+#' Get and set the charge range in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the charge range in the msgfPar 
+#' object of interest
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter a numeric vector with the named elements 'min'
+#' and 'max'
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' chargeRange(parameters) <- c(2, 4)
+#' chargeRange(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'chargeRange',
     def=function(object){standardGeneric('chargeRange')}
 )
-#' @export
+
+#' @rdname chargeRange
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either a numeric vector of length 2 or an msgfParChargeRange
+#' object
+#' 
+#' @export
 #' 
 setGeneric(
     'chargeRange<-',
     def=function(object, value){standardGeneric('chargeRange<-')}
 )
 
-#' @export
+#' Get and set enzyme in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the enzyme used for digestion
+#' during sample treatment.
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter a named integer
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' enzyme(parameters) <- 'Trypsin'
+#' enzyme(parameters) <- 3
+#' enzyme(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'enzyme',
     def=function(object){standardGeneric('enzyme')}
 )
-#' @export
+#' @rdname enzyme
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either an integer, string or msgfParEnzyme object
+#' 
+#' @export
 #' 
 setGeneric(
     'enzyme<-',
     def=function(object, value){standardGeneric('enzyme<-')}
 )
 
-#' @export
+#' Get and set fragmentation in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the fragmentation method used
+#' during acquisition
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter a named integer
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' fragmentation(parameters) <- 'CID'
+#' fragmentation(parameters) <- 3
+#' fragmentation(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'fragmentation',
     def=function(object){standardGeneric('fragmentation')}
 )
-#' @export
+#' @rdname fragmentation
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either an integer, string or msgfParFragmentation object
+#' 
+#' @export
 #' 
 setGeneric(
     'fragmentation<-',
     def=function(object, value){standardGeneric('fragmentation<-')}
 )
 
-#' @export
+#' Get and set instrument in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the instrument type used for
+#' acquisition
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter a named integer
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' instrument(parameters) <- 'TOF'
+#' instrument(parameters) <- 3
+#' instrument(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'instrument',
     def=function(object){standardGeneric('instrument')}
 )
-#' @export
+#' @rdname instrument
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either an integer, string or msgfParInstrument object
+#' 
+#' @export
 #' 
 setGeneric(
     'instrument<-',
     def=function(object, value){standardGeneric('instrument<-')}
 )
 
-#' @export
+#' Get and set isotope error in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the isotope error used when 
+#' calculating the parent ion error range
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter an integer vector
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' isotopeError(parameters) <- 0:3
+#' isotopeError(parameters)
+#' @export
 #' 
 setGeneric(
     'isotopeError',
     def=function(object){standardGeneric('isotopeError')}
 )
-#' @export
+#' @rdname isotopeError
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either an integer vector or an msgfParIsotopeError object
+#' 
+#' @export
 #' 
 setGeneric(
     'isotopeError<-',
     def=function(object, value){standardGeneric('isotopeError<-')}
 )
 
-#' @export
+#' Get and set peptide length range in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the residue length allowed for
+#' the peptides search for in MS-GF+
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter an integer vector of length 2 giving the lower
+#' and upper bounds of the length range
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' lengthRange(parameters) <- c(6, 40)
+#' lengthRange(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'lengthRange',
     def=function(object){standardGeneric('lengthRange')}
 )
-#' @export
+#' @rdname lengthRange
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either an integer vector or an msgfParLengthRange object
+#' 
+#' @export
 #' 
 setGeneric(
     'lengthRange<-',
     def=function(object, value){standardGeneric('lengthRange<-')}
 )
 
-#' @export
+#' Get and set the number of matches in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the number of matches per 
+#' spectrum returned by MS-GF+
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter an integer
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' matches(parameters) <- 5
+#' matches(parameters)
+#' @export
 #' 
 setGeneric(
     'matches',
     def=function(object){standardGeneric('matches')}
 )
-#' @export
+#' @rdname matches
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either an integer or an msgfParMatches object
+#' 
+#' @export
 #' 
 setGeneric(
     'matches<-',
     def=function(object, value){standardGeneric('matches<-')}
 )
 
-#' @export
+#' Get and set cleavage specificity in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the quality of cleavage allowed
+#' during search in MS-GF+ (number of tolerable termini - ntt)
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter an integer between 0 and 2
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' ntt(parameters) <- 2
+#' ntt(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'ntt',
     def=function(object){standardGeneric('ntt')}
 )
-#' @export
+#' @rdname ntt
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value An integer or an msgfParNtt object
+#' 
+#' @export
 #' 
 setGeneric(
     'ntt<-',
     def=function(object, value){standardGeneric('ntt<-')}
 )
 
-#' @export
+#' Get and set protocol in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the protocol used during MS-GF+
+#' analysis. This allows you to fine tune the analysis in case of labelled or
+#' phosphoproteomic analysis
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter a named integer
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' protocol(parameters) <- 'Phosphorylation'
+#' protocol(parameters) <- 0
+#' protocol(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'protocol',
     def=function(object){standardGeneric('protocol')}
 )
-#' @export
+#' @rdname protocol
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either an integer, a string or an msgfParProtocol object
+#' 
+#' @export
 #' 
 setGeneric(
     'protocol<-',
     def=function(object, value){standardGeneric('protocol<-')}
 )
 
-#' @export
+#' Get and set use of target-decoy approach in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set whether the target-decoy 
+#' approach should be used to estimate q-values.
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return In case of the getter a boolean indicating whether tda is used or not
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' tda(parameters) <- TRUE
+#' tda(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'tda',
     def=function(object){standardGeneric('tda')}
 )
-#' @export
+#' @rdname tda
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value Either a boolean or msgfParTda object
+#' 
+#' @export
 #' 
 setGeneric(
     'tda<-',
     def=function(object, value){standardGeneric('tda<-')}
 )
 
-#' @export
+#' Get and set the parent tolerance in msgfPar objects
 #' 
-#' @rdname msgfPar_get_set-methods
+#' These functions allow you to retrieve and set the tolerance used for matching
+#' parent ions to peptides in the database
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return For tolerance a character vector with the lower and upper tolerance 
+#' limit with unit. For toleranceUnit a string with the unit used. For 
+#' toleranceRange a numeric vector with lower and upper tolerance limit.
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' tolerance(parameters) <- c('20 ppm', '20 ppm')
+#' toleranceUnit(parameters) <- 'Da'
+#' toleranceRange(parameters) <- c(1.5, 1.5)
+#' tolerance(parameters)
+#' 
+#' @export
 #' 
 setGeneric(
     'tolerance',
     def=function(object){standardGeneric('tolerance')}
 )
-#' @export
+#' @rdname tolerance
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @param value For tolerance a character vector of length 2, each element of 
+#' the form '<value> <unit>'. For toleranceUnit a string. For toleranceRange a 
+#' numeric vector of length 2.
+#' 
+#' @export
 #' 
 setGeneric(
     'tolerance<-',
     def=function(object, value){standardGeneric('tolerance<-')}
 )
 
-#' @export
+#' @rdname tolerance
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @export
 #' 
 setGeneric(
     'toleranceRange',
     def=function(object){standardGeneric('toleranceRange')}
 )
-#' @export
+#' @rdname tolerance
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @export
 #' 
 setGeneric(
     'toleranceRange<-',
     def=function(object, value){standardGeneric('toleranceRange<-')}
 )
 
-#' @export
+#' @rdname tolerance
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @export
 #' 
 setGeneric(
     'toleranceUnit',
     def=function(object){standardGeneric('toleranceUnit')}
 )
-#' @export
+#' @rdname tolerance
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @export
 #' 
 setGeneric(
     'toleranceUnit<-',
     def=function(object, value){standardGeneric('toleranceUnit<-')}
 )
 
+#' Get and set the modifications in msgfPar objects
+#' 
+#' These functions allow you to retrieve and set the specific modifications 
+#' allowed on peptides during MS-GF+ search, as well as the number allowed on 
+#' each peptide
+#' 
+#' @param object An msgfPar object
+#' 
+#' @return For the getter an msgfParModificationList object or an integer (in 
+#' the case of nMod)
+#' 
+#' @family msgfPar-getter_setter
+#' 
+#' @examples
+#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' nMod(parameters) <- 2
+#' mods(parameters)[[1]] <- msgfParModification(
+#'                                                       name='Carbamidomethyl',
+#'                                                       composition='C2H3N1O1',
+#'                                                       residues='C',
+#'                                                       type='fix',
+#'                                                       position='any'
+#'                                                      )
+#' mods(parameters)
+#' 
 #' @export
 #' 
-#' @rdname msgfPar_get_set-methods
-#' 
 setGeneric(
-    'modifications',
-    def=function(object){standardGeneric('modifications')}
+    'mods',
+    def=function(object){standardGeneric('mods')}
 )
+#' @rdname mods
+#' 
+#' @param value An msgfParModificationList object or in the case of nMod an 
+#' integer
+#' 
 #' @export
 #' 
-#' @rdname msgfPar_get_set-methods
-#' 
 setGeneric(
-    'modifications<-',
-    def=function(object, value){standardGeneric('modifications<-')}
+    'mods<-',
+    def=function(object, value){standardGeneric('mods<-')}
 )
 
-#' @export
+#' @rdname mods
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @export
 #' 
 setGeneric(
     'nMod',
     def=function(object){standardGeneric('nMod')}
 )
-#' @export
+#' @rdname mods
 #' 
-#' @rdname msgfPar_get_set-methods
+#' @export
 #' 
 setGeneric(
     'nMod<-',
