@@ -1,0 +1,18 @@
+version 0.99.3
+________________________________________________________________________________
+* Fix in documentation
+
+version 0.99.2
+________________________________________________________________________________
+* Added introduction to vignette
+* Added sessionInfo to vignette
+* Removed calls to library(MSGFplus) in tests
+
+version 0.99.1
+________________________________________________________________________________
+* Update vignette styling and code
+
+version 0.99.0
+________________________________________________________________________________
+* Submission to Bioconductor
+* Update MS-GF+ to v10072
