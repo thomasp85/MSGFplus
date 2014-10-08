@@ -1,6 +1,7 @@
 #' A class handling instrument types
 #' 
-#' This class defines an instrument type and provides methods to get correct system
+#' This class defines an instrument type and provides methods to get correct 
+#' system
 #' call parameters.
 #' 
 #' @slot instrument An integer specifying the instrument type
@@ -45,7 +46,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParInstrument Report the length of an msgfParInstrument object
+#' @describeIn msgfParInstrument Report the length of an msgfParInstrument 
+#' object
 #' 
 #' @param x An msgfParInstrument object
 #' 
@@ -61,7 +63,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParInstrument Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParInstrument Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 

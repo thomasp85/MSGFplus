@@ -5,7 +5,8 @@
 #' 
 #' @param object An msgfPar object or a related object
 #' 
-#' @return A string that can be appended to a \code{system()} call to specify the parameters for the MSGF+ analysis
+#' @return A string that can be appended to a \code{system()} call to specify 
+#' the parameters for the MSGF+ analysis
 #' 
 #' @seealso \code{\link{msgfPar-class}}
 #' 
@@ -35,17 +36,24 @@ setGeneric(
 #' 
 #' @param object An msgfPar object
 #' 
-#' @param rawfiles A character vector holding the filepath to the spectrum files to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2, *.pkl or *_dta.txt)
+#' @param rawfiles A character vector holding the filepath to the spectrum files 
+#' to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2, 
+#' *.pkl or *_dta.txt)
 #' 
-#' @param savenames An optinal vector of same length as rawfiles. Specifies the name used to save the results. If omitted the results will be saved with the same name as the rawfile, but with an .mzid extension.
+#' @param savenames An optinal vector of same length as rawfiles. Specifies the 
+#' name used to save the results. If omitted the results will be saved with the 
+#' same name as the rawfile, but with an .mzid extension.
 #' 
-#' @param import Logical (default=TRUE). Should the results be imported in to R after the analysis is finished.
+#' @param import Logical (default=TRUE). Should the results be imported in to R 
+#' after the analysis is finished.
 #' 
-#' @param memory An integer (default=10000). How much memory should be allocated to the java virtual machine during execution (in mb)
+#' @param memory An integer (default=10000). How much memory should be allocated 
+#' to the java virtual machine during execution (in mb)
 #' 
 #' @param async An Logical (default=FALSE). Should MS-GF+ be run asynchronously?
 #' 
-#' @param msgfPath The path to an alternative MSGFPlus.jar file if the bundled one is not desired
+#' @param msgfPath The path to an alternative MSGFPlus.jar file if the bundled 
+#' one is not desired
 #' 
 #' @return If import=TRUE a list of mzID object otherwise NULL
 #' 
@@ -109,7 +117,7 @@ setGeneric(
 #' @family msgfPar-getter_setter
 #' 
 #' @examples
-#' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+#' parameters <- msgfPar()
 #' db(parameters) <- system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta')
 #' db(parameters)
 #' 

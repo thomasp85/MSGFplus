@@ -24,26 +24,35 @@ NULL
 #' of errorchecking and generating command line arguments, but in some cases, as
 #' with msgfParModificationList, the class is a bit more complex.
 #' 
-#' @param object An msgfPar object
-#' 
-#' @param x An msgfPar object
-#' 
 #' @section Objects from the class:
-#' Objects can be created using the \code{\link{msgfPar}} constructor, or with \code{\link{msgfParGUI}} for a simple graphical user interface
+#' Objects can be created using the \code{\link{msgfPar}} constructor, or with 
+#' \code{\link{msgfParGUI}} for a simple graphical user interface
 #' 
 #' @slot database The location of the database fasta file used for the analysis.
-#' @slot tolerance An \code{msgfParTolerance} object holding the m/z tolerance used in the search.
-#' @slot isotopeError An \code{msgfParIsotopeError} object holding the isotope errors permitted in the search.
-#' @slot tda An \code{msgfParTda} object saying whether FDR should be estimated using the target-decoy approach.
-#' @slot fragmentation An \code{msgfParFragmentation} object holding the type of fragmentation expected from the experiment.
-#' @slot instrument An \code{msgfParInstrument} object holding which type of instrument was used for collecting the data.
-#' @slot enzyme An \code{msgfParEnzyme} object holding which enzyme was used for digestion
-#' @slot protocol An \code{msgfParProtocol} object defining whether a specific protocol should be used in the search.
-#' @slot ntt An \code{msgfParNtt} object defining the number of tolerable termini allowed in the peptides.
-#' @slot modification An \code{msgfParModificationList} object holding the modifications accepted in the search.
-#' @slot lengthRange An \code{msgfParLengthRange} object setting the limits on the peptide length in residues that the search allows.
-#' @slot chargeRange An \code{msgfParChargeRange} object defining which charges should be included in the search.
-#' @slot matches An \code{msgfParMatches} object defining the number of matches per PSM that gets reported in the output.
+#' @slot tolerance An \code{msgfParTolerance} object holding the m/z tolerance 
+#' used in the search.
+#' @slot isotopeError An \code{msgfParIsotopeError} object holding the isotope 
+#' errors permitted in the search.
+#' @slot tda An \code{msgfParTda} object saying whether FDR should be estimated 
+#' using the target-decoy approach.
+#' @slot fragmentation An \code{msgfParFragmentation} object holding the type of
+#' fragmentation expected from the experiment.
+#' @slot instrument An \code{msgfParInstrument} object holding which type of 
+#' instrument was used for collecting the data.
+#' @slot enzyme An \code{msgfParEnzyme} object holding which enzyme was used for
+#' digestion
+#' @slot protocol An \code{msgfParProtocol} object defining whether a specific 
+#' protocol should be used in the search.
+#' @slot ntt An \code{msgfParNtt} object defining the number of tolerable 
+#' termini allowed in the peptides.
+#' @slot modification An \code{msgfParModificationList} object holding the 
+#' modifications accepted in the search.
+#' @slot lengthRange An \code{msgfParLengthRange} object setting the limits on 
+#' the peptide length in residues that the search allows.
+#' @slot chargeRange An \code{msgfParChargeRange} object defining which charges 
+#' should be included in the search.
+#' @slot matches An \code{msgfParMatches} object defining the number of matches 
+#' per PSM that gets reported in the output.
 #' 
 #' @seealso \code{\link{msgfParGUI}}
 #' @family msgfParClasses
@@ -97,6 +106,8 @@ setClass(
 
 #' @describeIn msgfPar Short summary of msgfPar object
 #' 
+#' @param object An msgfPar object
+#' 
 setMethod(
 	'show', 'msgfPar',
 	function(object){
@@ -123,6 +134,10 @@ setMethod(
 
 #' @describeIn msgfPar Report the length of an msgfPar object
 #' 
+#' @param x An msgfPar object
+#' 
+#' @return \code{length}: 1 if a database is defined, 0 otherwise.
+#' 
 setMethod(
 	'length', 'msgfPar',
 	function(x){
@@ -135,6 +150,9 @@ setMethod(
 )
 
 #' @describeIn msgfPar Get \code{\link[base]{system}} compliant function call
+#' 
+#' @return \code{getMSGFpar}: A stringified version of the parameters compliant
+#' with MS-GF+.
 #' 
 #' @examples
 #' parameters <- msgfPar(
@@ -166,17 +184,27 @@ setMethod(
 #' @describeIn msgfPar Initiate an MS-GF+ analysis using the selected msgfPar 
 #' object
 #' 
-#' @param rawfiles A character vector holding the filepath to the spectrum files to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2, *.pkl or *_dta.txt)
+#' @param rawfiles A character vector holding the filepath to the spectrum files
+#' to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2,
+#' *.pkl or *_dta.txt)
 #' 
-#' @param savenames An optinal vector of same length as rawfiles. Specifies the name used to save the results. If omitted the results will be saved with the same name as the rawfile, but with an .mzid extension.
+#' @param savenames An optinal vector of same length as rawfiles. Specifies the 
+#' name used to save the results. If omitted the results will be saved with the 
+#' same name as the rawfile, but with an .mzid extension.
 #' 
-#' @param import Logical (default=TRUE). Should the results be imported in to R after the analysis is finished.
+#' @param import Logical (default=TRUE). Should the results be imported in to R 
+#' after the analysis is finished.
 #' 
-#' @param memory An integer (default=10000). How much memory should be allocated to the java virtual machine during execution (in mb)
+#' @param memory An integer (default=10000). How much memory should be allocated
+#' to the java virtual machine during execution (in mb)
 #' 
 #' @param async An Logical (default=FALSE). Should MS-GF+ be run asynchronously?
 #' 
-#' @param msgfPath The path to an alternative MSGFPlus.jar file if the bundled one is not desired
+#' @param msgfPath The path to an alternative MSGFPlus.jar file if the bundled 
+#' one is not desired
+#' 
+#' @return \code{runMSGF}: If \code{import=TRUE} an mzID or mzIDCollection 
+#' object. If \code{async=TRUE} an msgfAsync object. Otherwise NULL
 #' 
 #' @examples
 #' \dontrun{
@@ -264,37 +292,56 @@ setMethod(
 #' these. Note however that at least a database file is required to run an 
 #' analysis.
 #' 
-#' Please consult the MS-GF+ documentation for full description of the parameters
+#' Please consult the MS-GF+ documentation for full description of the 
+#' parameters
 #' 
 #' @param database The location of the fasta file to use as search database
 #' 
-#' @param tolerance The parent ion tolerance to use. In simple cases a string in the form '20 ppm' or '1 Da' or an msgfParTolerance object if asymmetric tolerance is desired
+#' @param tolerance The parent ion tolerance to use. In simple cases a string in
+#' the form '20 ppm' or '1 Da' or an msgfParTolerance object if asymmetric 
+#' tolerance is desired
 #' 
-#' @param isotopeError The range of isotope errors used to correct for non-monoisotopic peaks. Either a numeric vector of length 2 specifying the lower and upper bounds of the range, or an msgfParIsotopeError object
+#' @param isotopeError The range of isotope errors used to correct for 
+#' non-monoisotopic peaks. Either a numeric vector of length 2 specifying the 
+#' lower and upper bounds of the range, or an msgfParIsotopeError object
 #' 
-#' @param tda \code{Logical} Should Target-Decoy approach be used to calculate FDR values.
+#' @param tda \code{Logical} Should Target-Decoy approach be used to calculate 
+#' FDR values.
 #' 
-#' @param fragmentation An integer specifying which fragmentation has been used during data acquisition. See details.
+#' @param fragmentation An integer specifying which fragmentation has been used 
+#' during data acquisition. See details.
 #' 
-#' @param instrument An integer specifying the type of instrument used during data acquisition. See details.
+#' @param instrument An integer specifying the type of instrument used during 
+#' data acquisition. See details.
 #' 
-#' @param enzyme An integer or name specifying the enzyme that has been used for protein digestion. See details.
+#' @param enzyme An integer or name specifying the enzyme that has been used 
+#' for protein digestion. See details.
 #' 
-#' @param protocol An integer or name specifying the type of preparation that has been done for the samples. See details.
+#' @param protocol An integer or name specifying the type of preparation that 
+#' has been done for the samples. See details.
 #' 
-#' @param ntt An integer specifying the cleavage specificity (Number of Tolerable Termini). 2 only allows fully tryptic peptide (if trypsin is used), 1 allows semitryptic peptides and 0 allows unspecific peptides
+#' @param ntt An integer specifying the cleavage specificity (Number of 
+#' Tolerable Termini). 2 only allows fully tryptic peptide (if trypsin is used), 
+#' 1 allows semitryptic peptides and 0 allows unspecific peptides
 #' 
-#' @param modification An msgfParModificationList object or a list containing the named elements nMod and modifications containing respectively an integer with the number of allowed modifications per petide and the modifications to search for as msgfParModification 
+#' @param modification An msgfParModificationList object or a list containing 
+#' the named elements nMod and modifications containing respectively an integer 
+#' with the number of allowed modifications per petide and the modifications to 
+#' search for as msgfParModification 
 #' 
-#' @param lengthRange A two element vector containing the lower and upper bounds of the residue length to search for
+#' @param lengthRange A two element vector containing the lower and upper bounds 
+#' of the residue length to search for
 #' 
-#' @param chargeRange A two element vector containing the lower and upper bounds of the charge range to search for
+#' @param chargeRange A two element vector containing the lower and upper bounds 
+#' of the charge range to search for
 #' 
 #' @param matches The number of matches to report per spectrum
 #' 
+#' @return An msgfPar object
 #' 
 #' @details
-#' Fragmentation is usually specified as an integer according to the following lookup
+#' Fragmentation is usually specified as an integer according to the following 
+#' lookup
 #' \describe{
 #'   \item{0}{As written in the spectrum or CID if no info}
 #'   \item{1}{CID}
@@ -302,9 +349,11 @@ setMethod(
 #'   \item{3}{HCD}
 #'   \item{4}{Merge spectra from the same precursor}
 #' }
-#' It is possible to use the full name of the description for a more litteral function call
+#' It is possible to use the full name of the description for a more litteral 
+#' function call
 #' 
-#' Instrument can likewise be specified as an integer or as a name according to this list
+#' Instrument can likewise be specified as an integer or as a name according to 
+#' this list
 #' \describe{
 #'   \item{0}{LowRes}
 #'   \item{1}{HighRes}
@@ -326,7 +375,9 @@ setMethod(
 #'   \item{9}{No cleavage}
 #' }
 #' 
-#' The protocol informs MS-GF+ whether a special sample treatment has been performed as part of the analysis. The protocol is specified according to the following list
+#' The protocol informs MS-GF+ whether a special sample treatment has been 
+#' performed as part of the analysis. The protocol is specified according to 
+#' the following list
 #' \describe{
 #'   \item{0}{No protocol}
 #'   \item{1}{Phosphorylation}

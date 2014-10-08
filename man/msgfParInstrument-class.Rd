@@ -31,16 +31,19 @@ For getMSGFpar() A string.
 For msgfParInstrument() An msgfParInstrument object.
 }
 \description{
-This class defines an instrument type and provides methods to get correct system
+This class defines an instrument type and provides methods to get correct
+system
 call parameters.
 }
 \section{Methods (by generic)}{
 \itemize{
 \item \code{show}: Short summary of msgfParInstrument object
 
-\item \code{length}: Report the length of an msgfParInstrument object
+\item \code{length}: Report the length of an msgfParInstrument
+object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 }}
 \section{Slots}{
 

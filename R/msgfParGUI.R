@@ -10,7 +10,8 @@
 #' necessarily exist on your system. In addition at least one of the gWidgetsXXX
 #' packages are needed.
 #' 
-#' @return A msgfPar object with parameters set according to the final state of the GUI
+#' @return A msgfPar object with parameters set according to the final state of 
+#' the GUI
 #' 
 #' @examples
 #' \dontrun{

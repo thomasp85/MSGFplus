@@ -35,7 +35,7 @@ fasta file in the msgfPar object of interest
 \item \code{object = msgfPar,value = character}: Set the database location
 }}
 \examples{
-parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
+parameters <- msgfPar()
 db(parameters) <- system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta')
 db(parameters)
 }

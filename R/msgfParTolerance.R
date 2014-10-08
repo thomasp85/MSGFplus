@@ -1,7 +1,7 @@
 #' A class handling parent ion tolerance
 #' 
-#' This class defines a parent ion tolerance and provides methods to get correct system
-#' call parameters.
+#' This class defines a parent ion tolerance and provides methods to get correct 
+#' system call parameters.
 #' 
 #' @slot unit The unit used to define the tolerance
 #' @slot low The lower bound of the tolerance
@@ -72,7 +72,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParTolerance Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParTolerance Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 

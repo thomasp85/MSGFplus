@@ -1,9 +1,11 @@
 #' A class handling number of matches
 #' 
-#' This class defines a number of matches and provides methods to get correct system
+#' This class defines a number of matches and provides methods to get correct 
+#' system
 #' call parameters.
 #' 
-#' @slot value An integer giving the number of matches per spectrum reported by MS-GF+
+#' @slot value An integer giving the number of matches per spectrum reported by 
+#' MS-GF+
 #' 
 #' @examples
 #' matches <- msgfParMatches(5)
@@ -58,7 +60,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParMatches Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParMatches Get \code{\link[base]{system}} compliant function 
+#' call
 #' 
 #' @return For getMSGFpar() A string.
 #' 
@@ -74,7 +77,8 @@ setMethod(
 )
 #' @rdname msgfParMatches-class
 #' 
-#' @param value An integer giving the number of matches that should be returned per spectrum
+#' @param value An integer giving the number of matches that should be returned 
+#' per spectrum
 #' 
 #' @return For msgfParMatches() An msgfParMatches object.
 #' 

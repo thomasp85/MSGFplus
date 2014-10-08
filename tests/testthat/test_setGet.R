@@ -1,5 +1,3 @@
-library(MSGFplus)
-
 context('Getters and setters for msgfPar')
 
 testPar <- msgfPar(

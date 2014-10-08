@@ -31,8 +31,8 @@ For getMSGFpar() A string.
 For msgfParEnzyme() An msgfParEnzyme object.
 }
 \description{
-This class defines a digestion enzyme selection and provides methods to get correct system
-call parameters.
+This class defines a digestion enzyme selection and provides methods to get
+correct system call parameters.
 }
 \section{Methods (by generic)}{
 \itemize{
@@ -40,12 +40,14 @@ call parameters.
 
 \item \code{length}: Report the length of an msgfParEnzyme object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function
+call
 }}
 \section{Slots}{
 
 \describe{
-\item{\code{enzyme}}{An integer specifiying the selection of enzyme. See the detail section of \code{\link{msgfPar}}}
+\item{\code{enzyme}}{An integer specifiying the selection of enzyme. See the detail
+section of \code{\link{msgfPar}}}
 }}
 \examples{
 enzyme <- msgfParEnzyme(1)

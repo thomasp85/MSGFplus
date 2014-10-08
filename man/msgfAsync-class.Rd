@@ -37,10 +37,11 @@ is still running. Throws an error if the process is finished but the result
 file doesn't exist.
 }
 \description{
-Objects of this class contains a reference to an asynchronous running MS-GF+
-process and can be used to query the state of the process, and import the
-results if the process has finished. Instances of this class are created when
-the runMSGF() method is called with \code{async=TRUE} on an msgfPar object.
+Objects of this class contains a reference to an asynchronous
+running MS-GF+ process and can be used to query the state of the process, and
+import the  results if the process has finished. Instances of this class are
+created when the runMSGF() method is called with \code{async=TRUE} on an
+msgfPar object.
 
 Unlike regular runMSGF() calls, this does not support batch mode, meaning
 that if a more than one raw file is supplied, all but the first are ignored

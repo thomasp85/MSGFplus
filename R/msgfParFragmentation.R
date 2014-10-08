@@ -1,7 +1,7 @@
 #' A class handling Fragmentation types
 #' 
-#' This class defines a fragmentation type and provides methods to get correct system
-#' call parameters.
+#' This class defines a fragmentation type and provides methods to get correct 
+#' system call parameters.
 #' 
 #' @slot method An integer between 0 and 4 giving the selected method
 #' 
@@ -45,7 +45,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParFragmentation Report the length of an msgfParFragmentation object
+#' @describeIn msgfParFragmentation Report the length of an msgfParFragmentation 
+#' object
 #' 
 #' @param x An msgfParFragmentation object
 #' 
@@ -61,7 +62,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParFragmentation Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParFragmentation Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 

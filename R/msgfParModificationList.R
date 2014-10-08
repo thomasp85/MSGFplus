@@ -6,8 +6,10 @@ NULL
 #' This class defines a set of modifications and a maximum number of 
 #' modifications allowed per peptide.
 #' 
-#' @slot nMod The maximum allowed number of modifications to expect on any peptide
-#' @slot modifications A list of \code{\linkS4class{msgfParModification}} objects
+#' @slot nMod The maximum allowed number of modifications to expect on any 
+#' peptide
+#' @slot modifications A list of \code{\linkS4class{msgfParModification}} 
+#' objects
 #' 
 #' @examples
 #' modification1 <- msgfParModification(
@@ -64,7 +66,8 @@ setClass(
 				modifications=list()
 		)
 )
-#' @describeIn msgfParModificationList Short summary of msgfParModificationList object
+#' @describeIn msgfParModificationList Short summary of msgfParModificationList 
+#' object
 #' 
 #' @param object An msgfParModificationList object
 #' 
@@ -81,7 +84,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParModificationList Report the length of an msgfParModificationList object
+#' @describeIn msgfParModificationList Report the length of an 
+#' msgfParModificationList object
 #' 
 #' @param x An msgfParModificationList object
 #' 
@@ -93,7 +97,8 @@ setMethod(
 			length(x@modifications)
 		}
 )
-#' @describeIn msgfParModificationList Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParModificationList Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 
@@ -147,9 +152,11 @@ setMethod(
 )
 #' @rdname msgfParModificationList-class
 #' 
-#' @param nMod The maximum allowed number of modifications to expect on any peptide
+#' @param nMod The maximum allowed number of modifications to expect on any 
+#' peptide
 #' 
-#' @param modifications A list of \code{\linkS4class{msgfParModification}} objects
+#' @param modifications A list of \code{\linkS4class{msgfParModification}} 
+#' objects
 #' 
 #' @return For msgfParModificationList() An msgfParModificationList object.
 #' 

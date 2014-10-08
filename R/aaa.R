@@ -4,7 +4,8 @@
 #' 
 #' @param savename The location where the results should be saved
 #' 
-#' @return A character vector that is compatible with the OS that can be concatenated with the MS-GF+ call
+#' @return A character vector that is compatible with the OS that can be 
+#' concatenated with the MS-GF+ call
 #' 
 #' @noRd
 #' 

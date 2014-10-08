@@ -9,29 +9,48 @@ msgfPar(database, tolerance, isotopeError, tda, fragmentation, instrument,
 \arguments{
 \item{database}{The location of the fasta file to use as search database}
 
-\item{tolerance}{The parent ion tolerance to use. In simple cases a string in the form '20 ppm' or '1 Da' or an msgfParTolerance object if asymmetric tolerance is desired}
+\item{tolerance}{The parent ion tolerance to use. In simple cases a string in
+the form '20 ppm' or '1 Da' or an msgfParTolerance object if asymmetric
+tolerance is desired}
 
-\item{isotopeError}{The range of isotope errors used to correct for non-monoisotopic peaks. Either a numeric vector of length 2 specifying the lower and upper bounds of the range, or an msgfParIsotopeError object}
+\item{isotopeError}{The range of isotope errors used to correct for
+non-monoisotopic peaks. Either a numeric vector of length 2 specifying the
+lower and upper bounds of the range, or an msgfParIsotopeError object}
 
-\item{tda}{\code{Logical} Should Target-Decoy approach be used to calculate FDR values.}
+\item{tda}{\code{Logical} Should Target-Decoy approach be used to calculate
+FDR values.}
 
-\item{fragmentation}{An integer specifying which fragmentation has been used during data acquisition. See details.}
+\item{fragmentation}{An integer specifying which fragmentation has been used
+during data acquisition. See details.}
 
-\item{instrument}{An integer specifying the type of instrument used during data acquisition. See details.}
+\item{instrument}{An integer specifying the type of instrument used during
+data acquisition. See details.}
 
-\item{enzyme}{An integer or name specifying the enzyme that has been used for protein digestion. See details.}
+\item{enzyme}{An integer or name specifying the enzyme that has been used
+for protein digestion. See details.}
 
-\item{protocol}{An integer or name specifying the type of preparation that has been done for the samples. See details.}
+\item{protocol}{An integer or name specifying the type of preparation that
+has been done for the samples. See details.}
 
-\item{ntt}{An integer specifying the cleavage specificity (Number of Tolerable Termini). 2 only allows fully tryptic peptide (if trypsin is used), 1 allows semitryptic peptides and 0 allows unspecific peptides}
+\item{ntt}{An integer specifying the cleavage specificity (Number of
+Tolerable Termini). 2 only allows fully tryptic peptide (if trypsin is used),
+1 allows semitryptic peptides and 0 allows unspecific peptides}
 
-\item{modification}{An msgfParModificationList object or a list containing the named elements nMod and modifications containing respectively an integer with the number of allowed modifications per petide and the modifications to search for as msgfParModification}
+\item{modification}{An msgfParModificationList object or a list containing
+the named elements nMod and modifications containing respectively an integer
+with the number of allowed modifications per petide and the modifications to
+search for as msgfParModification}
 
-\item{lengthRange}{A two element vector containing the lower and upper bounds of the residue length to search for}
+\item{lengthRange}{A two element vector containing the lower and upper bounds
+of the residue length to search for}
 
-\item{chargeRange}{A two element vector containing the lower and upper bounds of the charge range to search for}
+\item{chargeRange}{A two element vector containing the lower and upper bounds
+of the charge range to search for}
 
 \item{matches}{The number of matches to report per spectrum}
+}
+\value{
+An msgfPar object
 }
 \description{
 This function creates an msgfPar object with the specified parameters. If
@@ -41,9 +60,11 @@ these. Note however that at least a database file is required to run an
 analysis.
 }
 \details{
-Please consult the MS-GF+ documentation for full description of the parameters
+Please consult the MS-GF+ documentation for full description of the
+parameters
 
-Fragmentation is usually specified as an integer according to the following lookup
+Fragmentation is usually specified as an integer according to the following
+lookup
 \describe{
   \item{0}{As written in the spectrum or CID if no info}
   \item{1}{CID}
@@ -51,9 +72,11 @@ Fragmentation is usually specified as an integer according to the following look
   \item{3}{HCD}
   \item{4}{Merge spectra from the same precursor}
 }
-It is possible to use the full name of the description for a more litteral function call
+It is possible to use the full name of the description for a more litteral
+function call
 
-Instrument can likewise be specified as an integer or as a name according to this list
+Instrument can likewise be specified as an integer or as a name according to
+this list
 \describe{
   \item{0}{LowRes}
   \item{1}{HighRes}
@@ -75,7 +98,9 @@ Enymes are specified in the same manner using the following list
   \item{9}{No cleavage}
 }
 
-The protocol informs MS-GF+ whether a special sample treatment has been performed as part of the analysis. The protocol is specified according to the following list
+The protocol informs MS-GF+ whether a special sample treatment has been
+performed as part of the analysis. The protocol is specified according to
+the following list
 \describe{
   \item{0}{No protocol}
   \item{1}{Phosphorylation}

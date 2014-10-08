@@ -3,7 +3,8 @@
 #' This class defines a charge range and provides methods to get correct system
 #' call parameters.
 #' 
-#' @slot value A numeric vector of length 2 describing the upper and lower bounds of the charge range
+#' @slot value A numeric vector of length 2 describing the upper and lower 
+#' bounds of the charge range
 #' 
 #' @examples
 #' charges <- msgfParChargeRange(c(2, 5))
@@ -46,7 +47,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParChargeRange Report the length of an msgfParChargeRange object
+#' @describeIn msgfParChargeRange Report the length of an msgfParChargeRange 
+#' object
 #' 
 #' @param x An msgfParChargeRange object
 #' 
@@ -62,7 +64,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParChargeRange Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParChargeRange Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 
@@ -78,7 +81,8 @@ setMethod(
 )
 #' @rdname msgfParChargeRange-class
 #' 
-#' @param value A numeric vector of length 2. The first element must be smaller than the last
+#' @param value A numeric vector of length 2. The first element must be smaller 
+#' than the last
 #' 
 #' @return For msgfParChargeRange() An msgfParChargeRange object.
 #' 

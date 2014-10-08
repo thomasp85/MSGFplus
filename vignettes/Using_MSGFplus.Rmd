@@ -14,17 +14,50 @@ vignette: >
 * * *
 
 This document describe how to use the MSGFplus package to perform MS-GF+ 
-analyses on LC-MS/MS data. It will walk you through creating a parameter set and
-initialising the MS-GF+ analysis in different ways.
+analyses on liquid-chromatography tandem mass-spectroscopy (LC-MS/MS) data. It 
+will walk you through creating a parameter set and initialising the MS-GF+ 
+analysis in different ways.
 
 The different parameters needed to run MS-GF+ will not be discussed here as they
-are well documented on the [MS-GF+ webpage](http://proteomics.ucsd.edu/software-
-tools/ms-gf/).
+are well documented on the 
+[MS-GF+ webpage](http://proteomics.ucsd.edu/software-tools/ms-gf/).
 
 ```{r, eval=TRUE, echo=FALSE, results='hide', message=FALSE}
 require(MSGFplus)
 ```
 
+## Introduction
+
+One of the most ubiquitous steps of modern proteomics is the detection of 
+peptides from MS/MS fragmentation data. Usually the results of such an analysis
+will be used to infer the presence and possibly the quantity of proteins in your
+starting material. Automatic identification of peptides from LC-MS/MS 
+experiments was made possible with the SEQUEST algorithm from 1994, but the 
+process has constantly been refined and improved. Currently there exists a range
+of different algorithms for performing the identification task, all with 
+strengths and weaknesses, and MS-GF+ is an increasingly popular one of them.
+This package makes it possible to run MS-GF+ directly from within R, but is not
+a reimplementation of the algorithm. Underneath it all it is still the same java
+code performing the analysis.
+
+Related in functionality to this package is 
+[rTANDEM](http://www.bioconductor.org/packages/release/bioc/html/rTANDEM.html),
+which provides an R interface for the X! Tandem algorithm, in much the same way 
+as this package does for MS-GF+. As stated above each algorithm can have an 
+upper hand on certain kind of data and the consensus is increasingly to use 
+multiple algorithms on your data and combine the results. Having multiple 
+algorithms available from R is only making this easier. Other packages in the 
+Bioconductor project are concerned with other aspects of the proteomic workflow 
+and interested readers can get an overview in the 
+[proteomics package directory](http://www.bioconductor.org/packages/release/BiocViews.html#___Proteomics).
+
+### Data in the package
+As LC-MS/MS data tend to be very big, example files are not included in the 
+package. If you do not have access to any LC-MS/MS data but wish to experiment
+with the package, raw data can be obtained from different data repositories 
+(e.g. [PeptideAtlas](http://www.peptideatlas.org/repository/)). The only 
+included data is a very short fasta file (milk-proteins.fasta), that contains 
+the 3 caseins and 2 whey proteins that make up the bulk of proteins in milk.
 
 ## Creating a parameter set
 
@@ -79,15 +112,15 @@ complex:
 
 ```{r, eval=TRUE, echo=TRUE}
 mods(par)[[1]] <- msgfParModification(name = 'Carbamidomethyl', 
-                                               composition = 'C2H3N1O1', 
-                                               residues = 'C', 
-                                               type = 'opt', 
-                                               position = 'any')
+                                      composition = 'C2H3N1O1', 
+                                      residues = 'C', 
+                                      type = 'opt', 
+                                      position = 'any')
 mods(par)[[2]] <- msgfParModification(name = 'Oxidation', 
-                                               mass = 15.994915, 
-                                               residues = 'M', 
-                                               type = 'opt', 
-                                               position = 'any')
+                                      mass = 15.994915, 
+                                      residues = 'M', 
+                                      type = 'opt', 
+                                      position = 'any')
 nMod(par) <- 2                  # Set max number of modifications per peptide
 
 par
@@ -172,6 +205,12 @@ if(finished(msgf)) {
 ```
 
 ### Running MS-GF+ from a GUI
-GUI's are so nice that it got it's own package. Check out MSGFgui (also part of
-Bioconductor) if that is more to your taste. Besides running analysis it got a
-whole range of ways to investigate your results.
+GUI's are so nice that it got it's own package. Check out 
+[MSGFgui](https://github.com/thomasp85/MSGFgui) (also part of Bioconductor) if 
+that is more to your taste. Besides running analysis it got a whole range of 
+ways to investigate your results.
+
+## Session
+```{r, eval=TRUE, echo=TRUE}
+sessionInfo()
+```

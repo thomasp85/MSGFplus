@@ -61,7 +61,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParProtocol Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParProtocol Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 

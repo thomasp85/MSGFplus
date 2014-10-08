@@ -1,5 +1,3 @@
-library(MSGFplus)
-
 context('msgfParIsotopeError: Construction and standard properties')
 
 test_that('constructor works', {

@@ -9,7 +9,8 @@ getMSGFpar(object)
 \item{object}{An msgfPar object or a related object}
 }
 \value{
-A string that can be appended to a \code{system()} call to specify the parameters for the MSGF+ analysis
+A string that can be appended to a \code{system()} call to specify
+the parameters for the MSGF+ analysis
 }
 \description{
 The string representation is defined as the arguments that should get

@@ -1,7 +1,7 @@
 #' A class handling cleavage specificity
 #' 
-#' This class defines cleavage specificity and provides methods to get correct system
-#' call parameters.
+#' This class defines cleavage specificity and provides methods to get correct 
+#' system call parameters.
 #' 
 #' @slot value An integer between 0 and 2 that specifies the specificity (2: 
 #' full cleavage, 1: semi specific cleavage, 0: no specificity)

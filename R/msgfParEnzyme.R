@@ -1,9 +1,10 @@
 #' A class handling enzyme selection
 #' 
-#' This class defines a digestion enzyme selection and provides methods to get correct system
-#' call parameters.
+#' This class defines a digestion enzyme selection and provides methods to get 
+#' correct system call parameters.
 #' 
-#' @slot enzyme An integer specifiying the selection of enzyme. See the detail section of \code{\link{msgfPar}}
+#' @slot enzyme An integer specifiying the selection of enzyme. See the detail 
+#' section of \code{\link{msgfPar}}
 #' 
 #' @examples
 #' enzyme <- msgfParEnzyme(1)
@@ -61,7 +62,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParEnzyme Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParEnzyme Get \code{\link[base]{system}} compliant function 
+#' call
 #' 
 #' @return For getMSGFpar() A string.
 #' 

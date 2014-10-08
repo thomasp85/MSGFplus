@@ -1,5 +1,3 @@
-library(MSGFplus)
-
 context('msgfParModificationList: Construction and standard properties')
 
 mod1 <- msgfParModification(

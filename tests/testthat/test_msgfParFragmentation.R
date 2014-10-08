@@ -1,5 +1,3 @@
-library(MSGFplus)
-
 context('msgfParFragmentation: Construction and standard properties')
 
 test_that('constructor works', {

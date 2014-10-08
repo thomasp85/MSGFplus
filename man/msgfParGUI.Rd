@@ -6,7 +6,8 @@
 msgfParGUI()
 }
 \value{
-A msgfPar object with parameters set according to the final state of the GUI
+A msgfPar object with parameters set according to the final state of
+the GUI
 }
 \description{
 This function presents the user with a GUI where the different parameters can

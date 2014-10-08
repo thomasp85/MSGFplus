@@ -21,7 +21,8 @@ msgfParChargeRange(value)
 
 \item{x}{An msgfParChargeRange object}
 
-\item{value}{A numeric vector of length 2. The first element must be smaller than the last}
+\item{value}{A numeric vector of length 2. The first element must be smaller
+than the last}
 }
 \value{
 For length() An integer.
@@ -38,14 +39,17 @@ call parameters.
 \itemize{
 \item \code{show}: Short summary of msgfParChargeRange object
 
-\item \code{length}: Report the length of an msgfParChargeRange object
+\item \code{length}: Report the length of an msgfParChargeRange
+object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 }}
 \section{Slots}{
 
 \describe{
-\item{\code{value}}{A numeric vector of length 2 describing the upper and lower bounds of the charge range}
+\item{\code{value}}{A numeric vector of length 2 describing the upper and lower
+bounds of the charge range}
 }}
 \examples{
 charges <- msgfParChargeRange(c(2, 5))

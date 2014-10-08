@@ -3,7 +3,8 @@
 #' This class defines a length range and provides methods to get correct system
 #' call parameters.
 #' 
-#' @slot value A numeric vector of length 2 describing the upper and lower bounds of the length range
+#' @slot value A numeric vector of length 2 describing the upper and lower 
+#' bounds of the length range
 #' 
 #' @examples
 #' lengths <- msgfParLengthRange(c(6, 40))
@@ -46,7 +47,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParLengthRange Report the length of an msgfParLengthRange object
+#' @describeIn msgfParLengthRange Report the length of an msgfParLengthRange 
+#' object
 #' 
 #' @param x An msgfParLengthRange object
 #' 
@@ -62,7 +64,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParLengthRange Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParLengthRange Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 
@@ -78,7 +81,8 @@ setMethod(
 )
 #' @rdname msgfParLengthRange-class
 #' 
-#' @param value A numeric vector of length 2. The first element must be smaller than the last
+#' @param value A numeric vector of length 2. The first element must be smaller 
+#' than the last
 #' 
 #' @return For msgfParLengthRange() An msgfParLengthRange object.
 #' 

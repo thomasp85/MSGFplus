@@ -21,7 +21,8 @@ msgfParLengthRange(value)
 
 \item{x}{An msgfParLengthRange object}
 
-\item{value}{A numeric vector of length 2. The first element must be smaller than the last}
+\item{value}{A numeric vector of length 2. The first element must be smaller
+than the last}
 }
 \value{
 For length() An integer.
@@ -38,14 +39,17 @@ call parameters.
 \itemize{
 \item \code{show}: Short summary of msgfParLengthRange object
 
-\item \code{length}: Report the length of an msgfParLengthRange object
+\item \code{length}: Report the length of an msgfParLengthRange
+object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 }}
 \section{Slots}{
 
 \describe{
-\item{\code{value}}{A numeric vector of length 2 describing the upper and lower bounds of the length range}
+\item{\code{value}}{A numeric vector of length 2 describing the upper and lower
+bounds of the length range}
 }}
 \examples{
 lengths <- msgfParLengthRange(c(6, 40))

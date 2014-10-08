@@ -1,5 +1,3 @@
-library(MSGFplus)
-
 context('msgfParEnzyme: Construction and standard properties')
 
 test_that('constructor works', {

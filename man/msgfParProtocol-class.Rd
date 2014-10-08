@@ -40,7 +40,8 @@ call parameters.
 
 \item \code{length}: Report the length of an msgfParProtocol object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 }}
 \section{Slots}{
 

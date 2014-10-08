@@ -31,16 +31,18 @@ For getMSGFpar() A string.
 For msgfParFragmentation() An msgfParFragmentation object.
 }
 \description{
-This class defines a fragmentation type and provides methods to get correct system
-call parameters.
+This class defines a fragmentation type and provides methods to get correct
+system call parameters.
 }
 \section{Methods (by generic)}{
 \itemize{
 \item \code{show}: Short summary of msgfParFragmentation object
 
-\item \code{length}: Report the length of an msgfParFragmentation object
+\item \code{length}: Report the length of an msgfParFragmentation
+object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 }}
 \section{Slots}{
 

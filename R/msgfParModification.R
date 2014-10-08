@@ -1,8 +1,9 @@
 #' A class handling modification characteristics
 #' 
 #' This class defines a single modification type that can be searched for by 
-#' MS-GF+. Modifications are collected in a \code{\link{msgfParModificationList}}
-#' before adding them to \code{\linkS4class{msgfPar}} objects.
+#' MS-GF+. Modifications are collected in a 
+#' \code{\link{msgfParModificationList}} before adding them to 
+#' \code{\linkS4class{msgfPar}} objects.
 #' 
 #' @slot composition The molecular formula for the modification.
 #' @slot mass The monoisotopic mass of the modification
@@ -66,7 +67,8 @@ setClass(
 			} else {}
 		}
 )
-#' @describeIn msgfParModification Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParModification Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 
@@ -100,7 +102,8 @@ setMethod(
 #' @param name The name of the modification
 #' 
 #' @param composition The molecular formular as a string for the modification. 
-#' Loss of atoms are denoted with negative integers (e.g. O-1 for loss of oxygen)
+#' Loss of atoms are denoted with negative integers (e.g. O-1 for loss of 
+#' oxygen)
 #' 
 #' @param mass The monoisotopic mass change between a peptide without and with
 #' the given modification. Either composition or mass must be defined.

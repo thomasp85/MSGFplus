@@ -36,9 +36,11 @@ msgfParModificationList(nMod, modifications = list())
 
 \item{value}{An msgfParModification object}
 
-\item{nMod}{The maximum allowed number of modifications to expect on any peptide}
+\item{nMod}{The maximum allowed number of modifications to expect on any
+peptide}
 
-\item{modifications}{A list of \code{\linkS4class{msgfParModification}} objects}
+\item{modifications}{A list of \code{\linkS4class{msgfParModification}}
+objects}
 }
 \value{
 For length() An integer.
@@ -55,11 +57,14 @@ modifications allowed per peptide.
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{show}: Short summary of msgfParModificationList object
+\item \code{show}: Short summary of msgfParModificationList
+object
 
-\item \code{length}: Report the length of an msgfParModificationList object
+\item \code{length}: Report the length of an
+msgfParModificationList object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 
 \item \code{[[}: Get the i'th modification
 
@@ -68,9 +73,11 @@ modifications allowed per peptide.
 \section{Slots}{
 
 \describe{
-\item{\code{nMod}}{The maximum allowed number of modifications to expect on any peptide}
+\item{\code{nMod}}{The maximum allowed number of modifications to expect on any
+peptide}
 
-\item{\code{modifications}}{A list of \code{\linkS4class{msgfParModification}} objects}
+\item{\code{modifications}}{A list of \code{\linkS4class{msgfParModification}}
+objects}
 }}
 \examples{
 modification1 <- msgfParModification(

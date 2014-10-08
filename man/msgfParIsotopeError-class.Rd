@@ -38,9 +38,11 @@ correction and provides methods to get correct system call parameters.
 \itemize{
 \item \code{show}: Short summary of msgfParIsotopeError object
 
-\item \code{length}: Report the length of an msgfParIsotopeError object
+\item \code{length}: Report the length of an msgfParIsotopeError
+object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 }}
 \section{Slots}{
 

@@ -40,7 +40,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParIsotopeError Report the length of an msgfParIsotopeError object
+#' @describeIn msgfParIsotopeError Report the length of an msgfParIsotopeError 
+#' object
 #' 
 #' @param x An msgfParIsotopeError object
 #' 
@@ -56,7 +57,8 @@ setMethod(
 			}
 		}
 )
-#' @describeIn msgfParIsotopeError Get \code{\link[base]{system}} compliant function call
+#' @describeIn msgfParIsotopeError Get \code{\link[base]{system}} compliant 
+#' function call
 #' 
 #' @return For getMSGFpar() A string.
 #' 

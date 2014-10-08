@@ -32,8 +32,8 @@ For getMSGFpar() A string.
 For msgfParNtt() An msgfParNtt object.
 }
 \description{
-This class defines cleavage specificity and provides methods to get correct system
-call parameters.
+This class defines cleavage specificity and provides methods to get correct
+system call parameters.
 }
 \section{Methods (by generic)}{
 \itemize{

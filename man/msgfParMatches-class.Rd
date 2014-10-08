@@ -21,7 +21,8 @@ msgfParMatches(value)
 
 \item{x}{An msgfParMatches object}
 
-\item{value}{An integer giving the number of matches that should be returned per spectrum}
+\item{value}{An integer giving the number of matches that should be returned
+per spectrum}
 }
 \value{
 For length() An integer.
@@ -31,7 +32,8 @@ For getMSGFpar() A string.
 For msgfParMatches() An msgfParMatches object.
 }
 \description{
-This class defines a number of matches and provides methods to get correct system
+This class defines a number of matches and provides methods to get correct
+system
 call parameters.
 }
 \section{Methods (by generic)}{
@@ -40,12 +42,14 @@ call parameters.
 
 \item \code{length}: Report the length of an msgfParMatches object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function
+call
 }}
 \section{Slots}{
 
 \describe{
-\item{\code{value}}{An integer giving the number of matches per spectrum reported by MS-GF+}
+\item{\code{value}}{An integer giving the number of matches per spectrum reported by
+MS-GF+}
 }}
 \examples{
 matches <- msgfParMatches(5)

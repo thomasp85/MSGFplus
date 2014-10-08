@@ -1,5 +1,3 @@
-library(MSGFplus)
-
 context('msgfParTda: Construction and standard properties')
 
 test_that('constructor works', {

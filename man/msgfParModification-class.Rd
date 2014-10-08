@@ -20,7 +20,8 @@ msgfParModification(name, composition = "", mass = as.numeric(NA), residues,
 \item{name}{The name of the modification}
 
 \item{composition}{The molecular formular as a string for the modification.
-Loss of atoms are denoted with negative integers (e.g. O-1 for loss of oxygen)}
+Loss of atoms are denoted with negative integers (e.g. O-1 for loss of
+oxygen)}
 
 \item{mass}{The monoisotopic mass change between a peptide without and with
 the given modification. Either composition or mass must be defined.}
@@ -41,12 +42,14 @@ For msgfParModification() An msgfParModification object.
 }
 \description{
 This class defines a single modification type that can be searched for by
-MS-GF+. Modifications are collected in a \code{\link{msgfParModificationList}}
-before adding them to \code{\linkS4class{msgfPar}} objects.
+MS-GF+. Modifications are collected in a
+\code{\link{msgfParModificationList}} before adding them to
+\code{\linkS4class{msgfPar}} objects.
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 
 \item \code{show}: Short summary of msgfParModification object
 }}

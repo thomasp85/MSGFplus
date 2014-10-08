@@ -37,8 +37,8 @@ For getMSGFpar() A string.
 For msgfParTolerance() An msgfParTolerance object.
 }
 \description{
-This class defines a parent ion tolerance and provides methods to get correct system
-call parameters.
+This class defines a parent ion tolerance and provides methods to get correct
+system call parameters.
 }
 \section{Methods (by generic)}{
 \itemize{
@@ -46,7 +46,8 @@ call parameters.
 
 \item \code{length}: Report the length of an msgfParTolerance object
 
-\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant function call
+\item \code{getMSGFpar}: Get \code{\link[base]{system}} compliant
+function call
 }}
 \section{Slots}{
 

@@ -1,5 +1,3 @@
-library(MSGFplus)
-
 context('getMSGFpar: Extract parameter strings')
 
 testPar <- msgfPar(

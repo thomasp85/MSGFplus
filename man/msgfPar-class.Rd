@@ -22,17 +22,33 @@
 
 \item{x}{An msgfPar object}
 
-\item{rawfiles}{A character vector holding the filepath to the spectrum files to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2, *.pkl or *_dta.txt)}
+\item{rawfiles}{A character vector holding the filepath to the spectrum files
+to be analysed (currently supported formats: *.mzML, *.mzXML, *.mgf, *.ms2,
+*.pkl or *_dta.txt)}
 
-\item{savenames}{An optinal vector of same length as rawfiles. Specifies the name used to save the results. If omitted the results will be saved with the same name as the rawfile, but with an .mzid extension.}
+\item{savenames}{An optinal vector of same length as rawfiles. Specifies the
+name used to save the results. If omitted the results will be saved with the
+same name as the rawfile, but with an .mzid extension.}
 
-\item{import}{Logical (default=TRUE). Should the results be imported in to R after the analysis is finished.}
+\item{import}{Logical (default=TRUE). Should the results be imported in to R
+after the analysis is finished.}
 
-\item{memory}{An integer (default=10000). How much memory should be allocated to the java virtual machine during execution (in mb)}
+\item{memory}{An integer (default=10000). How much memory should be allocated
+to the java virtual machine during execution (in mb)}
 
 \item{async}{An Logical (default=FALSE). Should MS-GF+ be run asynchronously?}
 
-\item{msgfPath}{The path to an alternative MSGFPlus.jar file if the bundled one is not desired}
+\item{msgfPath}{The path to an alternative MSGFPlus.jar file if the bundled
+one is not desired}
+}
+\value{
+\code{length}: 1 if a database is defined, 0 otherwise.
+
+\code{getMSGFpar}: A stringified version of the parameters compliant
+with MS-GF+.
+
+\code{runMSGF}: If \code{import=TRUE} an mzID or mzIDCollection
+object. If \code{async=TRUE} an msgfAsync object. Otherwise NULL
 }
 \description{
 This class collects and stores parameters for an MS-GF+ analysis and is the
@@ -60,33 +76,46 @@ object
 \describe{
 \item{\code{database}}{The location of the database fasta file used for the analysis.}
 
-\item{\code{tolerance}}{An \code{msgfParTolerance} object holding the m/z tolerance used in the search.}
+\item{\code{tolerance}}{An \code{msgfParTolerance} object holding the m/z tolerance
+used in the search.}
 
-\item{\code{isotopeError}}{An \code{msgfParIsotopeError} object holding the isotope errors permitted in the search.}
+\item{\code{isotopeError}}{An \code{msgfParIsotopeError} object holding the isotope
+errors permitted in the search.}
 
-\item{\code{tda}}{An \code{msgfParTda} object saying whether FDR should be estimated using the target-decoy approach.}
+\item{\code{tda}}{An \code{msgfParTda} object saying whether FDR should be estimated
+using the target-decoy approach.}
 
-\item{\code{fragmentation}}{An \code{msgfParFragmentation} object holding the type of fragmentation expected from the experiment.}
+\item{\code{fragmentation}}{An \code{msgfParFragmentation} object holding the type of
+fragmentation expected from the experiment.}
 
-\item{\code{instrument}}{An \code{msgfParInstrument} object holding which type of instrument was used for collecting the data.}
+\item{\code{instrument}}{An \code{msgfParInstrument} object holding which type of
+instrument was used for collecting the data.}
 
-\item{\code{enzyme}}{An \code{msgfParEnzyme} object holding which enzyme was used for digestion}
+\item{\code{enzyme}}{An \code{msgfParEnzyme} object holding which enzyme was used for
+digestion}
 
-\item{\code{protocol}}{An \code{msgfParProtocol} object defining whether a specific protocol should be used in the search.}
+\item{\code{protocol}}{An \code{msgfParProtocol} object defining whether a specific
+protocol should be used in the search.}
 
-\item{\code{ntt}}{An \code{msgfParNtt} object defining the number of tolerable termini allowed in the peptides.}
+\item{\code{ntt}}{An \code{msgfParNtt} object defining the number of tolerable
+termini allowed in the peptides.}
 
-\item{\code{modification}}{An \code{msgfParModificationList} object holding the modifications accepted in the search.}
+\item{\code{modification}}{An \code{msgfParModificationList} object holding the
+modifications accepted in the search.}
 
-\item{\code{lengthRange}}{An \code{msgfParLengthRange} object setting the limits on the peptide length in residues that the search allows.}
+\item{\code{lengthRange}}{An \code{msgfParLengthRange} object setting the limits on
+the peptide length in residues that the search allows.}
 
-\item{\code{chargeRange}}{An \code{msgfParChargeRange} object defining which charges should be included in the search.}
+\item{\code{chargeRange}}{An \code{msgfParChargeRange} object defining which charges
+should be included in the search.}
 
-\item{\code{matches}}{An \code{msgfParMatches} object defining the number of matches per PSM that gets reported in the output.}
+\item{\code{matches}}{An \code{msgfParMatches} object defining the number of matches
+per PSM that gets reported in the output.}
 }}
 \section{Objects from the class}{
 
-Objects can be created using the \code{\link{msgfPar}} constructor, or with \code{\link{msgfParGUI}} for a simple graphical user interface
+Objects can be created using the \code{\link{msgfPar}} constructor, or with
+\code{\link{msgfParGUI}} for a simple graphical user interface
 }
 \examples{
 parameters <- msgfPar(
