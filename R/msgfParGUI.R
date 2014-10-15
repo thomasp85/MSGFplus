@@ -172,7 +172,7 @@ msgfParGUI <- function(){
             parameters <- list()
             parameters$database <- svalue(h$action$database)
             parameters$tolerance <- msgfParTolerance(value=as.numeric(svalue(h$action$tolerance[[1]])), unit=svalue(h$action$tolerance[[2]]))
-            parameters$isotopeError <- msgfParIsotopeError(svalue(h$action$isotopeError[[1]]):svalue(h$action$isotopeError[[2]]))
+            parameters$isotopeError <- msgfParIsotopeError(c(svalue(h$action$isotopeError[[1]]),svalue(h$action$isotopeError[[2]])))
             parameters$tda <- msgfParTda(svalue(h$action$tda))
             parameters$fragmentation <- msgfParFragmentation(svalue(h$action$fragmentation, index=TRUE)-1)
             parameters$instrument <- msgfParInstrument(svalue(h$action$instrument, index=TRUE)-1)

@@ -47,10 +47,11 @@ function call
 \section{Slots}{
 
 \describe{
-\item{\code{range}}{An integer vector with isotopes to error correct}
+\item{\code{range}}{An integer vector with lower and upper bounds of isotopes to
+error correct}
 }}
 \examples{
-isotopeError <- msgfParIsotopeError(0:2)
+isotopeError <- msgfParIsotopeError(c(0, 2))
 }
 \seealso{
 Other msgfParClasses: \code{\link{[[,msgfParModificationList,numeric,missing-method}},

@@ -1,25 +1,44 @@
 Package: MSGFplus
 Type: Package
 Title: An interface between R and MS-GF+
-Version: 1.1.0
-Date: 2014-09-29
+Version: 1.1.1
+Date: 2014-10-15
 Author: Thomas Lin Pedersen
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
 Description: This package contains function to perform peptide
-        identification using MS-GF+
+    identification using MS-GF+
 License: GPL (>= 2)
 VignetteBuilder: knitr
 SystemRequirements: Java (>= 1.7)
 LazyLoad: yes
 biocViews: MassSpectrometry, Proteomics
-Depends: methods
-Imports: mzID
-Suggests: gWidgets, knitr, testthat
-Collate: 'MSGFplus-package.R' 'aaa.R' 'generics.R' 'msgfAsync.R'
-        'msgfParTolerance.R' 'msgfParTda.R' 'msgfParProtocol.R'
-        'msgfParNtt.R' 'msgfParModification.R'
-        'msgfParModificationList.R' 'msgfParMatches.R'
-        'msgfParLengthRange.R' 'msgfParIsotopeError.R'
-        'msgfParInstrument.R' 'msgfParFragmentation.R'
-        'msgfParEnzyme.R' 'msgfParChargeRange.R' 'msgfPar.R'
-        'msgfPar-getters.R' 'msgfParGUI.R' 'zzz.R'
+Depends:
+    methods
+Imports:
+    mzID
+Suggests:
+    gWidgets,
+    knitr,
+    testthat
+Collate:
+    'MSGFplus-package.R'
+    'aaa.R'
+    'generics.R'
+    'msgfAsync.R'
+    'msgfParTolerance.R'
+    'msgfParTda.R'
+    'msgfParProtocol.R'
+    'msgfParNtt.R'
+    'msgfParModification.R'
+    'msgfParModificationList.R'
+    'msgfParMatches.R'
+    'msgfParLengthRange.R'
+    'msgfParIsotopeError.R'
+    'msgfParInstrument.R'
+    'msgfParFragmentation.R'
+    'msgfParEnzyme.R'
+    'msgfParChargeRange.R'
+    'msgfPar.R'
+    'msgfPar-getters.R'
+    'msgfParGUI.R'
+    'zzz.R'

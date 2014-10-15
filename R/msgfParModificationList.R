@@ -117,6 +117,9 @@ setMethod(
 					cat('\n')
 				}
 				sink()
+				if(Sys.info()["sysname"] == 'Windows'){
+				    modFile <- paste0('\"', modFile, '\"')
+				}
 				paste('-mod', modFile)
 			} else {
 				''
@@ -165,7 +168,7 @@ setMethod(
 msgfParModificationList <- function(nMod, modifications=list()){
 	if(length(modifications) == 0){
 		mods <- new(Class='msgfParModificationList')
-        if(!missing(nMod)) nMod(mods) <- nMod
+        if(!missing(nMod)) mods@nMod <- nMod
         mods
 	} else {
 		modifications <- lapply(modifications, function(x){

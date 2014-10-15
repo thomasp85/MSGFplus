@@ -290,7 +290,7 @@ setGeneric(
 #' 
 #' @examples
 #' parameters <- msgfPar(system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'))
-#' isotopeError(parameters) <- 0:3
+#' isotopeError(parameters) <- c(0, 3)
 #' isotopeError(parameters)
 #' @export
 #' 

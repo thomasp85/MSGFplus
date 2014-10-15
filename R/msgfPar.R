@@ -242,6 +242,9 @@ setMethod(
         } else {
             if(!file.exists(msgfPath)) stop('No jar file at specified location')
         }
+        if(Sys.info()["sysname"] == 'Windows'){
+            msgfPath <- paste0('\"', msgfPath, '\"')
+        }
         if(!missing(savenames) && length(rawfiles) != length(savenames)){
             stop('Number of raw files must correspond to number of savenames')
         } else {}
@@ -394,7 +397,7 @@ setMethod(
 #' parameters <- msgfPar(
 #'                       database=system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'),
 #'                       tolerance='20 ppm',
-#'                       isotopeError=0:2,
+#'                       isotopeError=c(0, 2),
 #'                       tda=TRUE,
 #'                       fragmentation='CID',
 #'                       instrument='TOF',
@@ -544,7 +547,7 @@ msgfParFromID <- function(file){
 	} else {}
     
     ans$tda <- parameters@parameters$TargetDecoyApproach
-    ans$isotopeError <- seq(parameters@parameters$MinIsotopeError, parameters@parameters$MaxIsotopeError)
+    ans$isotopeError <- c(parameters@parameters$MinIsotopeError, parameters@parameters$MaxIsotopeError)
     ans$fragmentation <- parameters@parameters$FragmentMethod
     ans$instrument <- parameters@parameters$Instrument
     ans$ntt <- parameters@parameters$NumTolerableTermini
