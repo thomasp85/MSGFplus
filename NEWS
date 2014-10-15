@@ -1,3 +1,12 @@
+version 1.0.1
+________________________________________________________________________________
+* Fixed bug in how isotope errors were handled on windows machines
+* Fixed bug in msgfParModificationList constructor
+
+version 1.0.0
+________________________________________________________________________________
+* Release in Bioconductor 3.0
+
 version 0.99.3
 ________________________________________________________________________________
 * Fix in documentation

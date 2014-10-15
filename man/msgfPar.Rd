@@ -113,7 +113,7 @@ the following list
 parameters <- msgfPar(
                       database=system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'),
                       tolerance='20 ppm',
-                      isotopeError=0:2,
+                      isotopeError=c(0, 2),
                       tda=TRUE,
                       fragmentation='CID',
                       instrument='TOF',

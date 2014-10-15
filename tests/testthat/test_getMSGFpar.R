@@ -3,7 +3,7 @@ context('getMSGFpar: Extract parameter strings')
 testPar <- msgfPar(
     database=system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'),
     tolerance='20 ppm',
-    isotopeError=0:2,
+    isotopeError=c(0,2),
     tda=TRUE,
     fragmentation='CID',
     instrument='TOF',
@@ -73,7 +73,7 @@ test_that('msgfParTolerance behaves', {
 })
 
 test_that('msgfParIsotopeError behaves', {
-    expect_equal(getMSGFpar(msgfParIsotopeError(-2:2)), '-ti -2,-1,0,1,2')
+    expect_equal(getMSGFpar(msgfParIsotopeError(c(-2,2))), '-ti -2,2')
 })
 
 test_that('msgfParTda behaves', {

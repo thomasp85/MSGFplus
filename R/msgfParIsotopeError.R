@@ -3,10 +3,11 @@
 #' This class defines a set of isotopes that should be included for error 
 #' correction and provides methods to get correct system call parameters.
 #' 
-#' @slot range An integer vector with isotopes to error correct
+#' @slot range An integer vector with lower and upper bounds of isotopes to 
+#' error correct
 #' 
 #' @examples
-#' isotopeError <- msgfParIsotopeError(0:2)
+#' isotopeError <- msgfParIsotopeError(c(0, 2))
 #' 
 #' @family msgfParClasses
 #' 
@@ -16,11 +17,13 @@ setClass(
 				range='numeric'
 		),
 		validity=function(object){
-			if(all(floor(object@range) == object@range)){
-				return(TRUE)
-			} else {
+			if(all(floor(object@range) != object@range)){
 				return('range must consist of integers')
 			}
+            if(length(object@range) != 2) {
+                return('Range must have length 2')
+            }
+			return(TRUE)
 		},
 		prototype=prototype(
 				range=as.numeric(NA)
@@ -36,7 +39,7 @@ setMethod(
 			if(length(object) == 0){
 				cat('An empty istopeError object\n')
 			} else {
-				cat(object@range, '\n')
+			    cat(object@range[1], '-', object@range[2], '\n')
 			}
 		}
 )
@@ -68,7 +71,11 @@ setMethod(
 			if(length(object) == 0){
 				''
 			} else {
-				paste('-ti ', paste(object@range, collapse=','), sep='')
+                range <- paste(object@range, collapse=',')
+                if(Sys.info()["sysname"] == 'Windows'){
+                    range <- paste0('\"', range, '\"')
+                }
+				paste0('-ti ', range)
 			}
 		}
 )

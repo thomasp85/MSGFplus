@@ -3,7 +3,7 @@ context('Getters and setters for msgfPar')
 testPar <- msgfPar(
     database=system.file(package='MSGFplus', 'extdata', 'milk-proteins.fasta'),
     tolerance='20 ppm',
-    isotopeError=0:2,
+    isotopeError=c(0,2),
     tda=TRUE,
     fragmentation='CID',
     instrument='TOF',
@@ -47,7 +47,7 @@ test_that('tolerance can be set and get', {
 })
 
 test_that('isotope error can be set and get', {
-    isotopeError(testPar) <- 2:3
+    isotopeError(testPar) <- c(2, 3)
     expect_equal(isotopeError(testPar), c(2, 3))
 })
 
