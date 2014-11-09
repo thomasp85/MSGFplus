@@ -95,7 +95,7 @@ instrument(par) <- 'QExactive'  # Set the instrument used for acquisition
 enzyme(par) <- 'Trypsin'        # Set the enzyme used for digestion
 fragmentation(par) <- 0         # Set the fragmentation method
 protocol(par) <- 0              # Set the protocol type
-isotopeError(par) <- c(0,1,2)   # Set the isotope error
+isotopeError(par) <- c(0,2)     # Set the isotope error
 matches(par) <- 2               # Set the number of matches to report per scan
 ntt(par) <- 1                   # Set number of tolerable termini
 tda(par) <- TRUE                # Use target decoy approach
