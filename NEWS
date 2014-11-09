@@ -1,3 +1,7 @@
+version 1.0.2
+________________________________________________________________________________
+* Fixed bug in Vignette introduced in 1.0.1
+
 version 1.0.1
 ________________________________________________________________________________
 * Fixed bug in how isotope errors were handled on windows machines

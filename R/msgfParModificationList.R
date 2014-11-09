@@ -51,7 +51,7 @@ setClass(
 		validity=function(object){
 			if(length(object@nMod) != 1){
 				return('nMod must be of length 1')
-			} else if(object@nMod != floor(object@nMod)){
+			} else if(!is.na(object@nMod) && object@nMod != floor(object@nMod)){
 				return('nMod must be an integer')
 			} else if(length(object@modifications) != 0){
 				if(!all(sapply(object@modifications, class) == 'msgfParModification')){
@@ -169,6 +169,7 @@ msgfParModificationList <- function(nMod, modifications=list()){
 	if(length(modifications) == 0){
 		mods <- new(Class='msgfParModificationList')
         if(!missing(nMod)) mods@nMod <- nMod
+        validObject(mods)
         mods
 	} else {
 		modifications <- lapply(modifications, function(x){

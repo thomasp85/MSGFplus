@@ -73,7 +73,11 @@ test_that('msgfParTolerance behaves', {
 })
 
 test_that('msgfParIsotopeError behaves', {
-    expect_equal(getMSGFpar(msgfParIsotopeError(c(-2,2))), '-ti -2,2')
+    if(Sys.info()["sysname"] == 'Windows'){
+        expect_equal(getMSGFpar(msgfParIsotopeError(c(-2,2))), '-ti \"-2,2\"')
+    } else {
+        expect_equal(getMSGFpar(msgfParIsotopeError(c(-2,2))), '-ti -2,2')
+    }
 })
 
 test_that('msgfParTda behaves', {
