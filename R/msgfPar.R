@@ -257,7 +257,11 @@ setMethod(
             fileCall <- createFileCall(rawfiles[1], savenames[1])
             systemCall <- paste0('java -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', parameterCall)
             checkfile <- tempfile('checkfile', fileext='.txt')
-            system(paste0(systemCall, ' && echo "">', checkfile), wait=FALSE, ignore.stdout=TRUE, ignore.stderr=TRUE)
+            if(Sys.info()["sysname"] == 'Windows') {
+                shell(paste0(systemCall, ' && echo "">', checkfile), wait=FALSE, ignore.stdout=TRUE, ignore.stderr=TRUE)
+            } else {
+                system(paste0(systemCall, ' && echo "">', checkfile), wait=FALSE, ignore.stdout=TRUE, ignore.stderr=TRUE)
+            }
             return(new('msgfAsync', checkfile, savenames[1]))
         }
         
