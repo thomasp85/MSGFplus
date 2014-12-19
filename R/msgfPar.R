@@ -171,11 +171,7 @@ setMethod(
 		par <- list(object@tolerance, object@isotopeError, object@tda, object@fragmentation, object@instrument, object@enzyme, object@protocol, object@ntt, object@modification, object@lengthRange, object@chargeRange, object@matches)
 		par <- sapply(par, getMSGFpar)
         par <- par[par!='']
-		if(Sys.info()["sysname"] == 'Windows'){
-			db <- paste('\"', object@database, '\"', sep='')
-		} else {
-			db <- gsub(' ', '\\ ', object@database, fixed=TRUE)
-		}
+        db <- shQuote(object@database)
 		ans <- paste('-d', db, paste(par, collapse=' '))
 		ans
 	}
@@ -242,9 +238,7 @@ setMethod(
         } else {
             if(!file.exists(msgfPath)) stop('No jar file at specified location')
         }
-        if(Sys.info()["sysname"] == 'Windows'){
-            msgfPath <- paste0('\"', msgfPath, '\"')
-        }
+        msgfPath <- shQuote(msgfPath)
         if(!missing(savenames) && length(rawfiles) != length(savenames)){
             stop('Number of raw files must correspond to number of savenames')
         } else {}

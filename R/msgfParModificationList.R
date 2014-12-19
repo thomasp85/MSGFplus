@@ -117,9 +117,7 @@ setMethod(
 					cat('\n')
 				}
 				sink()
-				if(Sys.info()["sysname"] == 'Windows'){
-				    modFile <- paste0('\"', modFile, '\"')
-				}
+                modFile <- shQuote(modFile)
 				paste('-mod', modFile)
 			} else {
 				''
