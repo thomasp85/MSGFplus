@@ -73,7 +73,7 @@ setMethod(
 			} else {
                 range <- paste(object@range, collapse=',')
                 if(Sys.info()["sysname"] == 'Windows'){
-                    range <- paste0('\"', range, '\"')
+                    range <- shQuote(range)
                 }
 				paste0('-ti ', range)
 			}
