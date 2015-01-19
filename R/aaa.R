@@ -10,14 +10,7 @@
 #' @noRd
 #' 
 createFileCall <- function(rawfile, savename){
-    if(Sys.info()["sysname"] == 'Windows'){
-        rawfile <- paste0('\"', rawfile, '\"')
-        savename <- paste0('\"', savename, '\"')
-    } else {
-        rawfile <- gsub(' ', '\\ ', rawfile, fixed=TRUE)
-        savename <- gsub(' ', '\\ ', savename, fixed=TRUE)
-    }
-    paste0('-s ', rawfile, ' -o ', savename)
+    paste0('-s ', shQuote(rawfile), ' -o ', shQuote(savename))
 }
 
 #' Download the MS-GF+ jar file
