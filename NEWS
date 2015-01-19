@@ -1,3 +1,8 @@
+version 1.0.3
+________________________________________________________________________________
+* Fixed bug when using openjdk instead of Oracle Java runtime
+* Use shell instead of system on windows machines when running async
+
 version 1.0.2
 ________________________________________________________________________________
 * Fixed bug in Vignette introduced in 1.0.1
