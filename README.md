@@ -1,5 +1,7 @@
 MSGFplus
 ======
+![](http://bioconductor.org/shields/years-in-bioc/MSGFplus.svg) ![](http://bioconductor.org/shields/downloads/MSGFplus.svg) Release: ![](http://bioconductor.org/shields/build/release/bioc/MSGFplus.svg) Devel: ![](http://bioconductor.org/shields/build/devel/bioc/MSGFplus.svg)
+
 This package aims to bridge R and the peptide database search tool MS-GF+. The 
 main class of the package is `msgfPar` which handles parsing of parameters to 
 MS-GF+. The `msgfPar` class has a `runMSGF` method that starts a peptide search
