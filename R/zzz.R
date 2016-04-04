@@ -6,7 +6,7 @@ Sys.which2 <- function(cmd) {
         suppressWarnings({
             pathname <- shell(sprintf("where %s 2> NUL", cmd), intern=TRUE)[1]
         })
-        if (!is.na(pathname)) return(setNames(pathname, cmd))
+        if (!is.na(pathname)) return(stats::setNames(pathname, cmd))
     }
     Sys.which(cmd)
 }
