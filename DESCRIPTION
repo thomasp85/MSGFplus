@@ -6,7 +6,10 @@ Date: 2015-01-19
 Author: Thomas Lin Pedersen
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
 Description: This package contains function to perform peptide
-    identification using MS-GF+
+    identification using the MS-GF+ algorithm. The package contains 
+    functionality for building up a parameter set both in code and through a
+    simple GUI, as well as running the algorithm in batches, potentially 
+    asynchronously.
 License: GPL (>= 2)
 VignetteBuilder: knitr
 SystemRequirements: Java (>= 1.7)
@@ -15,7 +18,8 @@ biocViews: MassSpectrometry, Proteomics
 Depends:
     methods
 Imports:
-    mzID
+    mzID,
+    ProtGenerics
 Suggests:
     gWidgets,
     knitr,
@@ -42,3 +46,4 @@ Collate:
     'msgfPar-getters.R'
     'msgfParGUI.R'
     'zzz.R'
+RoxygenNote: 6.0.1

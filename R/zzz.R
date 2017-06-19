@@ -1,4 +1,3 @@
-
 # from http://stackoverflow.com/a/34031214/470769
 Sys.which2 <- function(cmd) {
     stopifnot(length(cmd) == 1)
