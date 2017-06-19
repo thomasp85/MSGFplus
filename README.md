@@ -1,5 +1,7 @@
 MSGFplus
 ======
+![](http://bioconductor.org/shields/years-in-bioc/MSGFplus.svg) ![](http://bioconductor.org/shields/downloads/MSGFplus.svg) Release: ![](http://bioconductor.org/shields/build/release/bioc/MSGFplus.svg) Devel: ![](http://bioconductor.org/shields/build/devel/bioc/MSGFplus.svg)
+
 This package aims to bridge R and the peptide database search tool MS-GF+. The 
 main class of the package is `msgfPar` which handles parsing of parameters to 
 MS-GF+. The `msgfPar` class has a `runMSGF` method that starts a peptide search
@@ -15,15 +17,11 @@ visual interface on top of this package using shiny.
 
 Installation
 ------
-MSGFgui and it's sister package MSGFplus is intented for inclusion within the next Bioconductor release. Until then, try it out by installing as follows:
+MSGFgui and it's sister package MSGFplus are part of [Bioconductor](http://www.bioconductor.org/packages/release/bioc/html/MSGFplus.html) and can be installed through that repository. Instruction are as follows:
 
 ```R
 source("http://bioconductor.org/biocLite.R")
-biocLite('mzR')
-biocLite('mzID')
-install.packages('shiny')
-install.packages('devtools')
-install_github('MSGFplus', 'thomasp85')
+biocLite('MSGFplus')
 ```
 
 Credit
