@@ -254,7 +254,7 @@ setMethod(
                 savenames[1] <- file.path(getwd(), savenames[1])
             }
             fileCall <- createFileCall(rawfiles[1], savenames[1])
-            systemCall <- paste0('java -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', parameterCall)
+            systemCall <- paste0(shQuote(.javaExecutable()), ' -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', parameterCall)
             checkfile <- tempfile('checkfile', fileext='.txt')
             if(Sys.info()["sysname"] == 'Windows') {
                 shell(paste0(systemCall, ' && echo "">', checkfile), wait=FALSE, ignore.stdout=TRUE, ignore.stderr=TRUE)
@@ -269,7 +269,7 @@ setMethod(
                 savenames[i] <- file.path(getwd(), savenames[i])
             }
             fileCall <- createFileCall(rawfiles[i], savenames[i])
-            systemCall <- paste0('java -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', parameterCall)
+            systemCall <- paste0(shQuote(.javaExecutable()), ' -Xmx', memory, 'M -jar ', msgfPath, ' ', fileCall, ' ', parameterCall)
             cat(systemCall, '\n\n')
             system(systemCall)
         }
