@@ -18,6 +18,7 @@ createFileCall <- function(rawfile, savename){
 #' This function downloads and extracts MS-GF+ into the package directory
 #' 
 #' @noRd
+#' @importFrom utils download.file unzip
 #' 
 getMSGFplus <- function() {
     zipFile <- tempfile()
