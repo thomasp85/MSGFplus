@@ -1,7 +1,7 @@
 Package: MSGFplus
 Type: Package
 Title: An interface between R and MS-GF+
-Version: 1.13.0
+Version: 1.14.0
 Date: 2017-06-19
 Author: Thomas Lin Pedersen
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
