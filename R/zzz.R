@@ -24,3 +24,6 @@ Sys.which2 <- function(cmd) {
         }
     }
 }
+
+jversion <- str_match(string = java_versions, 
+          pattern = '[[:alpha:] ]+\"([[:digit:]]+)\\.([[:digit:]]+)\\..*')
