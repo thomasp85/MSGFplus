@@ -1,8 +1,8 @@
 Package: MSGFplus
 Type: Package
 Title: An interface between R and MS-GF+
-Version: 1.11.1
-Date: 2017-06-19
+Version: 1.15.1
+Date: 2018-06-28
 Author: Thomas Lin Pedersen
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
 Description: This package contains function to perform peptide
@@ -19,7 +19,8 @@ Depends:
     methods
 Imports:
     mzID,
-    ProtGenerics
+    ProtGenerics,
+    stringr
 Suggests:
     gWidgets,
     knitr,
