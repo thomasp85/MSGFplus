@@ -1,7 +1,7 @@
 Package: MSGFplus
 Type: Package
 Title: An interface between R and MS-GF+
-Version: 1.17.0
+Version: 1.17.1
 Date: 2017-06-19
 Author: Thomas Lin Pedersen
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
@@ -14,7 +14,7 @@ License: GPL (>= 2)
 VignetteBuilder: knitr
 SystemRequirements: Java (>= 1.7)
 LazyLoad: yes
-biocViews: MassSpectrometry, Proteomics
+biocViews: ImmunoOncology, MassSpectrometry, Proteomics
 Depends:
     methods
 Imports:
