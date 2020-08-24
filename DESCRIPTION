@@ -21,7 +21,6 @@ Imports:
     mzID,
     ProtGenerics
 Suggests:
-    gWidgets,
     knitr,
     testthat
 Collate:
