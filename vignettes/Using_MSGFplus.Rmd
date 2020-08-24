@@ -150,15 +150,6 @@ par <- msgfParFromID('/path/to/results/file.mzid')
 par
 ```
 
-The last method of setting up a parameter set is with a simple gui that is 
-pretty much self-explanatory:
-
-```{r, eval=FALSE}
-require(gWidgets)
-
-par <- msgfParGUI()
-```
-
 ## Running MS-GF+
 
 When a parameter set has been defined to your likening you can start an MS-GF+

@@ -19,7 +19,9 @@ Sys.which2 <- function(cmd) {
     if(length(javaVersion) == 0) {
         warning('Java was not found on your system. Java is required for MS-GF+ to work.')
     } else {
-        if(as.numeric(sub('.*\"\\d\\.(\\d).*', '\\1', javaVersion[1])) < 7) {
+        major <- as.numeric(sub('.*\"(\\d+)\\.\\d+.*', '\\1', javaVersion[1]))
+        minor <- as.numeric(sub('.*\"\\d+\\.(\\d+).*', '\\1', javaVersion[1]))
+        if((major == 1 && minor < 8) || major < 1) {
             warning('Java need to be at least version 1.7 for MS-GF+ to work. Please upgrade.')
         }
     }

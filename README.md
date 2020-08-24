@@ -8,8 +8,7 @@ MS-GF+. The `msgfPar` class has a `runMSGF` method that starts a peptide search
 for a given set of MS data files and possibly reimports the results using mzID.  
 
 Besides this basic functionality it also supports reading in parameters from 
-mzIdentML files created by MS-GF+ in order to replicate a search setup as well 
-as a very simple gWidgets based GUI to fill out a `msgfPar` object.
+mzIdentML files created by MS-GF+ in order to replicate a search setup.
 
 MSGFplus is intended as a pure R wrapper. For a more engaging user experience
 have a look at [MSGFgui](https://github.com/thomasp85/MSGFgui) which provides a
