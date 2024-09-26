@@ -43,6 +43,5 @@ Collate:
     'msgfParChargeRange.R'
     'msgfPar.R'
     'msgfPar-getters.R'
-    'msgfParGUI.R'
     'zzz.R'
 RoxygenNote: 6.0.1
